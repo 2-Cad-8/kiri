@@ -59,27 +59,47 @@ body {
         width:100%;
         position: relative;
         
-        .message-format{
-            width:75%;
-            background:@light-blue;
-            border-radius: 0.3125rem;
-            padding:0.4375rem ;
+        .message-group{
+            display: flex;
+            flex-wrap: nowrap;
+            row-gap: 0;
+            align-items: center;
             
-            &.kiri{
-                //margin-left:14%;
-                margin:0.625rem 0rem; 
-               
+            .message-format{
+                width:fit-content;
+                background:@light-blue;
+                border-radius: 0.3125rem;
+                padding: 0.4375rem 1.25rem 0.4375rem;
+                
+                
+                &.kiri{
+                    //margin-left:14%;
+                    margin:0.3125rem 3%; 
+                    padding-right: 0.625rem;
+                    padding-left: 0.4375rem;
+                    order: 2;
+                }
+                &.user{
+                    //margin-right:14%;
+                    background-color: @medium-blue;
+                    margin:0.3125rem 3% 0.3125rem auto;
+                    padding-left: 0.625rem;
+                    padding-right: 0.625rem;
+                    
+                }
+                
+
+                button{
+                    background-color: @medium-blue;
+                }
             }
-            &.user{
-                //margin-right:14%;
-                background-color: #0074A1;
-                margin:0.3125rem 0 0.3125rem auto;
-            }
-            button{
-                background-color: @medium-blue;
+            .icon-user{
+                width:2.1875rem; 
+                height:2.1875rem; 
+                background-color: @light-blue;
+                border-radius: 100%;
             }
         }
-        
     }
 
     .top-bar{

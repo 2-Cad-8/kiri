@@ -44,21 +44,38 @@ body .main {
   width: 100%;
   position: relative;
 }
-body .main .message-format {
-  width: 75%;
+body .main .message-group {
+  display: flex;
+  flex-wrap: nowrap;
+  row-gap: 0;
+  align-items: center;
+}
+body .main .message-group .message-format {
+  width: fit-content;
   background: #4CB3BF;
   border-radius: 0.3125rem;
-  padding: 0.4375rem;
+  padding: 0.4375rem 1.25rem 0.4375rem;
 }
-body .main .message-format.kiri {
-  margin: 0.625rem 0rem;
+body .main .message-group .message-format.kiri {
+  margin: 0.3125rem 3%;
+  padding-right: 0.625rem;
+  padding-left: 0.4375rem;
+  order: 2;
 }
-body .main .message-format.user {
+body .main .message-group .message-format.user {
   background-color: #0074A1;
-  margin: 0.3125rem 0 0.3125rem auto;
+  margin: 0.3125rem 3% 0.3125rem auto;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
-body .main .message-format button {
+body .main .message-group .message-format button {
   background-color: #0074A1;
+}
+body .main .message-group .icon-user {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  background-color: #4CB3BF;
+  border-radius: 100%;
 }
 body .top-bar {
   background-color: #0074A1;

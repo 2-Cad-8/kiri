@@ -19,7 +19,8 @@ var i_preguntas = 1; /*Contador de preguntas */
 const db = firebase.firestore();
 //******************************************************collections
 const usuariosRef = firebase.firestore().collection('Usuario');
-const preguntasRef = firebase.firestore().collection('Preguntas');
+const preguntasRef = '../data/preguntas.json';
+//firebase.firestore().collection('Preguntas');
 
 //*************************************EVENT LISTENER
 window.addEventListener('DOMContentLoaded',   (e) => { 
@@ -80,9 +81,8 @@ function opciones2 (id_container,n_pregunta){
 function search_question (i_preguntas){
     //search a question by its id and prints it
     //variables
-    var id = i_preguntas.toString();
+    var id = i_preguntas;
     var questionData;
-    var container;
     var section;
     /* section check*/
     if(i_preguntas >= 1 || i_preguntas <= 6){

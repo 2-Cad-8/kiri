@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded',   (e) => {
     
         //buscar la pregunta
         create_answer_button('trial',1,5);
+        loading();
         search_question(1);
         
         
@@ -109,7 +110,28 @@ function update_answer(i_preguntas, answer){
             });	
 }
 //*******************************************************DOM FUNCTIONS
+function loading (){
+    var message_wrap = document.createElement('div');
+    var message_format = document.createElement('div');
+    var load = document.createElement('div');
+    var dot1 = document.createElement('span');
+    var dot2 = document.createElement('span');
+    var dot3 = document.createElement('span');
 
+    load.appendChild(dot1);
+    load.appendChild(dot2);
+    load.appendChild(dot3);
+    load.setAttribute('class', 'load');
+
+    message_format.appendChild(load);
+    message_format.setAttribute('class', 'message-format kiri')
+
+    message_wrap.appendChild(message_format);
+    message_wrap.setAttribute('class', 'message-group');
+
+    main.appendChild(message_wrap);
+    
+}
 
 function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
@@ -120,20 +142,26 @@ function print_question (seccion,pregunta,n_pregunta){
         'Me caracterizo por ser'
     ];
 
+    var message_wrap = document.createElement('div');
+    
+
     var new_message = document.createElement('div');
     var message_text = document.createTextNode(
         secciones_test[seccion] + ': ' + pregunta 
     );
     var optionsContainer = document.createElement('div');
+
+    message_wrap.setAttribute('class','message-group');
     optionsContainer.setAttribute('class','optionsContainer');
     optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
 
     new_message.appendChild(message_text);
     new_message.appendChild(optionsContainer);
-    new_message.setAttribute('class','message-format user');
+    new_message.setAttribute('class','message-format kiri');
     new_message.setAttribute('id','pregunta'+n_pregunta);
 
-    main.appendChild(new_message);
+    message_wrap.appendChild(new_message);
+    main.appendChild(message_wrap);
     var container_id_temporal = optionsContainer.id;
     //create the options here
     opciones2(container_id_temporal,n_pregunta);

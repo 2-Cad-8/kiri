@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+       
+ 
+        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="./css/estilos.css">
+        <link rel="stylesheet" href="./css/avatars_icons.css">
+        <link rel="stylesheet" href="./fontawesome/css/all.css">
+        
+
+        <title>Kiri</title>
+    </head>
+<div id="app">
+    <body >
+        <section class = 'top-bar' id = 'top-bar'>
+            <div class="container">
+                <h3 id="title" class="title">Kiri</h3>
+                <div class = 'perfil 'id = 'perfil'>
+                    <!--icono-perfil-->
+                    <div class="icon-container">
+                        <span class = "eicon-kiri-normal"></span>
+                    </div>                    
+
+                </div>
+            </div>
+        </section>
+
+        <section class = 'main' id = 'main'>
+            <div class="message-group">
+                <div class="message-format user">hello</div>
+                <div class ='icon-user'></div>
+            </div>
+            <div class="message-group">
+                <div class="message-format kiri">it's me</div>
+                <div class ='icon-user'></div>
+            </div>
+            <div class="message-group">
+                <div class="message-format user">me? who? </div>
+                <div class ='icon-user'></div>
+            </div>
+            <div class="message-group">
+                <div class="message-format kiri">your friend</div>
+                <div class ='icon-user'></div>
+            </div>
+            
+        </section>
+        
+        <section id="bottom-bar" class ="bottom-bar">
+            <form class = "container" id = "answer_box">
+                    <div class="col izq">
+                        <input type="text" class = "input-control"id="type_box">
+                    </div>
+
+                    <div class="col der">
+                            <button  class='button' id="enviar" >
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                    </div>
+            </form>
+        </section>
+
+        <!--Librerias-->   
+        <!--
+        <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+        --> 
+        <!--Librerias ADICIONALES--> 
+        <script type = "module" src = './js/main_functions.js'></script>
+        <script type = "module" src = './js/functions_json.js'></script>
+        
+    </body>
+</div>
+</html>

@@ -19,24 +19,15 @@ var i_preguntas = 1; /*Contador de preguntas */
 const db = firebase.firestore();
 //******************************************************collections
 const usuariosRef = firebase.firestore().collection('Usuario');
-const preguntasRef = '../data/preguntas.json';
-//firebase.firestore().collection('Preguntas');
+const preguntasRef = firebase.firestore().collection('Preguntas');
 
 //*************************************EVENT LISTENER
 window.addEventListener('DOMContentLoaded',   (e) => { 
-    //consult_db();
-        const inicio = document.createElement('button');
-        const texto = document.createTextNode('Hola...');
-        inicio.appendChild(texto);
-        inicio.setAttribute('class', 'boton-answ-user');
-        inicio.setAttribute('id','inicio');
-        inicio.addEventListener('click', (e)=> {
-            alert('I am  ready for action');
+    
         //buscar la pregunta
         create_answer_button('trial',1,5);
         search_question(1);
-        })
-        main.appendChild(inicio)
+        
         
        
         //var container_trial = 'optionsContainer1';
@@ -81,7 +72,7 @@ function opciones2 (id_container,n_pregunta){
 function search_question (i_preguntas){
     //search a question by its id and prints it
     //variables
-    var id = i_preguntas;
+    var id = i_preguntas.toString();
     var questionData;
     var section;
     /* section check*/
@@ -89,7 +80,7 @@ function search_question (i_preguntas){
         section = 0;
     }else if(i_preguntas >= 7 || i_preguntas <= 12){
         section = 1;
-    }else if(i_preguntas >= 7 || i_preguntas <= 12){
+    }else if(i_preguntas >= 13 || i_preguntas <= 18){
         section = 2;
     }
 
@@ -139,7 +130,7 @@ function print_question (seccion,pregunta,n_pregunta){
 
     new_message.appendChild(message_text);
     new_message.appendChild(optionsContainer);
-    new_message.setAttribute('class','message-format');
+    new_message.setAttribute('class','message-format user');
     new_message.setAttribute('id','pregunta'+n_pregunta);
 
     main.appendChild(new_message);

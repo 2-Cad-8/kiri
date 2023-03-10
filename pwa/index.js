@@ -8,8 +8,8 @@ app.get("/", function (req, res) {
 });
 app.listen(8000, () => console.log("Server is running on Port 8000"));
 
-//require ('sqlite3');
-const db = new sqlite3.Database("db.sqlite", (err) => {
+const sqlite = require ('sqlite3');
+const db = new sqlite.Database("db.sqlite", (err) => {
   if (err) {
     // Cannot open database
     console.error(err.message);

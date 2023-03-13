@@ -1,4 +1,4 @@
-import {Bd} from './clases.js';
+import {writer} from './writer.js';
 const firebaseConfig = {
     apiKey: "AIzaSyC0B_6vcoaeQiTf6GCvBESLHNUm8nNDQ7w",
     authDomain: "kiri-451ea.firebaseapp.com",
@@ -27,7 +27,8 @@ window.addEventListener('DOMContentLoaded',   (e) => {
         //buscar la pregunta
         create_answer_button('trial',1,5);
         loading();
-        search_question(1);
+        writer();
+        search_question(0);
         
         
        
@@ -85,18 +86,31 @@ function search_question (i_preguntas){
         section = 2;
     }
 
+    var temp =window.localStorage.getItem('preguntas.json');
+    var temp_questions = JSON.parse(temp);
+    var  question = temp_questions[i_preguntas]
+    questionData = question.preguntas;
+    console.log(temp_questions);
     //recover of the question
-    preguntasRef.doc(id).get().then((doc) => {
-        if (!doc.exists) return;
-        questionData = doc.data();
-        alert('Estoy dentro '+questionData.preguntas);
-        print_question(section,questionData.preguntas,id);
-    });
+    //preguntasRef.doc(id).get().then((doc) => {
+      //  if (!doc.exists) return;
+     //   questionData = doc.data();
+     //   alert('Estoy dentro '+questionData.preguntas);
+        print_question(section,questionData,id);
+   // });
 }
 
 function update_answer(i_preguntas, answer){
-    var i = i_preguntas.toString();
-    preguntasRef.doc(i)
+    //var i = i_preguntas.toString();
+    var temp = window.localStorage.getItem('preguntas.json');
+    var temp_array = JSON.parse(temp);
+    var modifyObj = temp_array[i_preguntas];
+    modifyObj.respuesta_u = answer;
+    temp_array[i_preguntas] =modifyObj;
+
+    window.localStorage.setItem('preguntas.json',JSON.stringify(temp_array));
+
+    /*preguntasRef.doc(i)
             .update({
                 respuesta_u: answer,
             })
@@ -107,7 +121,7 @@ function update_answer(i_preguntas, answer){
             })
             .catch((error) => {
                 console.error("Error updating doc", error);
-            });	
+            });	*/
 }
 //*******************************************************DOM FUNCTIONS
 function loading (){

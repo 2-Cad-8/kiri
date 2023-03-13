@@ -1,14 +1,4 @@
-import {Bd} from './clases.js';
-const firebaseConfig = {
-    apiKey: "AIzaSyC0B_6vcoaeQiTf6GCvBESLHNUm8nNDQ7w",
-    authDomain: "kiri-451ea.firebaseapp.com",
-    projectId: "kiri-451ea",
-    storageBucket: "kiri-451ea.appspot.com",
-    messagingSenderId: "169819015367",
-    appId: "1:169819015367:web:e712b7146fb39e6a6f96e2",
-    measurementId: "G-JHX48ZFJ8D"
-};
-firebase.initializeApp(firebaseConfig);
+
 //****************************************************Constants/Var*************************************** */
 const app = document.getElementById("app");
 const main = document.getElementById("main");
@@ -16,31 +6,18 @@ var answer_box = document.getElementById('answer_box');
 var enviar_boton = document.getElementById('enviar');
 var i_preguntas = 1; /*Contador de preguntas */
 //*******************************************************db basics
-const db = firebase.firestore();
+const db = require ('../sqlite3');
 //******************************************************collections
-const usuariosRef = firebase.firestore().collection('Usuario');
-const preguntasRef = '../data/preguntas.json';
+const usuariosRef = 'Usuario';
+const preguntasRef = 'Preguntas';
 //firebase.firestore().collection('Preguntas');
 
 //*************************************EVENT LISTENER
 window.addEventListener('DOMContentLoaded',   (e) => { 
-    //consult_db();
-        const inicio = document.createElement('button');
-        const texto = document.createTextNode('Hola...');
-        inicio.appendChild(texto);
-        inicio.setAttribute('class', 'boton-answ-user');
-        inicio.setAttribute('id','inicio');
-        inicio.addEventListener('click', (e)=> {
-            alert('I am  ready for action');
-        //buscar la pregunta
+    
         create_answer_button('trial',1,5);
         search_question(1);
-        })
-        main.appendChild(inicio)
         
-       
-        //var container_trial = 'optionsContainer1';
-    
 })
 
 
@@ -94,12 +71,11 @@ function search_question (i_preguntas){
     }
 
     //recover of the question
-    preguntasRef.doc(id).get().then((doc) => {
-        if (!doc.exists) return;
-        questionData = doc.data();
-        alert('Estoy dentro '+questionData.preguntas);
+    var sql = "SELECT pregunta FROM Preguntas WHERE id ="+id;
+    var questionData = db.get(sql);
+    
         print_question(section,questionData.preguntas,id);
-    });
+    
 }
 
 function update_answer(i_preguntas, answer){

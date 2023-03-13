@@ -15,8 +15,7 @@ var preguntas = [
 //table dudas
 //table user
 //table perfiles
-
-const localStorage = require ('fs');
+function writer(){
 const data = JSON.stringify(preguntas);
 const finished = (error) =>{
     if (error){
@@ -24,5 +23,7 @@ const finished = (error) =>{
         return;
     }
 }
-localStorage.writeFile("C:/Users/CarlosHernandez/OneDrive/Escritorio/No_tocar/thesis_app/data/preguntas.json", data, finished);
-console.log(preguntas);
+window.localStorage.setItem("preguntas.json", data, finished);
+
+console.log(preguntas);}
+export{writer}

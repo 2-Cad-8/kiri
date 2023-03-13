@@ -1,15 +1,15 @@
+const http = require("http");
 const express = require("express");
 const path = require("path");
 const app = express();
+const sqlite = require ('sqlite3').verbose();
+
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
 app.listen(8000, () => console.log("Server is running on Port 8000"));
 
-const sqlite = require ('sqlite3');
-const db = new sqlite.Database("db.sqlite", (err) => {
+
+const db = new sqlite.Database("db.sqlite3", (err) => {
   if (err) {
     // Cannot open database
     console.error(err.message);
@@ -34,10 +34,10 @@ var preguntas = [
 ];
 
 db.run(
-  `CREATE TABLE Preguntas (id INTEGER PRIMARY KEY AUTOINCREMENT, clave text , pregunta text, respuesta_u integer)`,
+  `CREATE TABLE IF NOT EXISTS Preguntas (id INTEGER PRIMARY KEY AUTOINCREMENT, clave TEXT , pregunta TEXT, respuesta_u INTEGER)`,
   (err) => {
     if (err) {
-      // console.log(err)
+      console.log(err + 'Ya existe');
       // Table already created
     } else {
       // Table just created, creating some rows
@@ -52,3 +52,12 @@ db.run(
     }
   }
 );
+
+//ENRUTAMIENTO
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+app.get("/perfil", function (req, res) {
+  res.sendFile(path.join(__dirname, "public/perfil.html"));
+});

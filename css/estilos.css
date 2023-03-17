@@ -92,14 +92,24 @@ body .main .message-group .message-format.user {
   padding-left: 0.625rem;
   padding-right: 0.625rem;
 }
-body .main .message-group .message-format button {
-  background-color: #0074A1;
-}
 body .main .message-group .icon-message {
   width: 2.1875rem;
   height: 2.1875rem;
   background-color: #4CB3BF;
   border-radius: 100%;
+}
+body .main .optionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 70%;
+  margin: 5% 10% 5% 27%;
+}
+body .main .optionsContainer button {
+  margin: 0.625rem;
+  height: 3.125rem;
+  width: 3.125rem;
 }
 body .top-bar {
   background-color: #0074A1;

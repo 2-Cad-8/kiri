@@ -164,10 +164,11 @@ function print_question (seccion,pregunta,n_pregunta){
         secciones_test[seccion] + ': ' + pregunta 
     );
     var optionsContainer = document.createElement('div');
-
-    message_wrap.setAttribute('class','message-group');
     optionsContainer.setAttribute('class','optionsContainer');
     optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
+    
+    message_wrap.setAttribute('class','message-group');
+    
 
     new_message.appendChild(message_text);
     new_message.appendChild(optionsContainer);

@@ -1,4 +1,4 @@
-const version = 1;
+/*const version = 1;
 let staticName = `staticCache-${version}`;
 let dynamicName = `dynamicCache`;
 let imageName = `imageCache-${version}`;
@@ -253,4 +253,4 @@ const openDB = (callback) => {
       callback();
     }
   };
-};
+};*/

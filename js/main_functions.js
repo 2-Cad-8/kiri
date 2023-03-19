@@ -124,9 +124,7 @@ function update_answer(i_preguntas, answer){
             });	*/
 }
 //*******************************************************DOM FUNCTIONS
-function loading (){
-    var message_wrap = document.createElement('div');
-    var message_format = document.createElement('div');
+function loading (fromWho){
     var load = document.createElement('div');
     var dot1 = document.createElement('span');
     var dot2 = document.createElement('span');
@@ -137,8 +135,8 @@ function loading (){
     load.appendChild(dot3);
     load.setAttribute('class', 'load');
 
-    message_format.appendChild(load);
-    message_format.setAttribute('class', 'message-format kiri')
+    var message = message_format
+    
 
     message_wrap.appendChild(message_format);
     message_wrap.setAttribute('class', 'message-group');

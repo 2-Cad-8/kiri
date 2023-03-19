@@ -3,8 +3,9 @@ import {
     get,
     createStore
 } from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
-var  db = createStore('kiri','Preguntas');
-var preguntas = [
+export let db = createStore('kiri','Preguntas');
+export const main = document.getElementById("main");
+export var preguntas = [
     {   
         clave:"R",
         preguntas:"De tipo práctico que impliquen la manipulación de herramientas, instrumentos, máquinas y equipo",
@@ -17,26 +18,13 @@ var preguntas = [
     }
 
 ]
-let user_avatar='';
-window.addEventListener('load', ()=>{
-    
-    set('1',preguntas[0],db)
-    .then(alert('it is written again'))
-    .catch(console.warn);
-    search_question(1);
-});
+let user_avatar='maleUser';
 
-function insert (preguntas){
-    alert('entered')
-    set('1', preguntas[0],db).then( () => {
-        alert('it worked');
-    }).catch(console.warn)
-}
 
 /********************************************************************************************
  *                                          FUNCIONES
  ********************************************************************************************/
-function search_question (i_preguntas){
+export function search_question (i_preguntas){
     //search a question by its id and prints it
     //variables
     var id = i_preguntas.toString();
@@ -57,24 +45,21 @@ function search_question (i_preguntas){
 
   
 }
-function update_answer(i_preguntas, answer){
-   
-    alert(answer);
+ function update_answer(i_preguntas, answer){
     get(i_preguntas.toString(),db)
         .then((datos)=>{
-            alert('1 data ' + datos)
-            alert('2 answer: '+ answer);
+            
             datos.respuesta_u = answer;
-            alert('3 changing values' + datos.respuesta_u);
+            
             set(i_preguntas.toString(),datos,db)
-            .then(alert("your answer has been updated successfully"))
+            .then(console.log('done'))
             .catch(console.warn);
 
         }).catch(console.warn);
     
 }
-
-function print_question (seccion,pregunta,n_pregunta){
+//*************************************************************DOM CREATIONS
+ function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
         part with a container for the options */
     const secciones_test = [
@@ -89,17 +74,24 @@ function print_question (seccion,pregunta,n_pregunta){
 
     var temp = message.firstChild;
     temp.appendChild(texto);
-    main.appendChild(message);
+    //load
+    var load = loading('kiri');
+    main.appendChild(load);
+    setTimeout(() => {
+        load.remove();
+        main.appendChild(message);
 
-    //container
-    var optionsContainer = document.createElement('div');
-    optionsContainer.setAttribute('class','optionsContainer');
-    optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
-    main.appendChild(optionsContainer);
-    opciones(optionsContainer.id,n_pregunta);
+        //container
+        var optionsContainer = document.createElement('div');
+        optionsContainer.setAttribute('class','optionsContainer');
+        optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
+        main.appendChild(optionsContainer);
+        opciones(optionsContainer.id,n_pregunta);
+    }, 2000);
+    
 }
     
-function message_format_builder(fromWho){
+ function message_format_builder(fromWho){
     // it builds the format/visuals for the message
     
     var who;
@@ -145,7 +137,7 @@ function message_format_builder(fromWho){
      
 }
 
-function opciones (id_container,n_pregunta){
+ function opciones (id_container,n_pregunta){
     /* Create from scratch the buttons 
     and add them directly to the container */
     var container_opt = document.getElementById(id_container);
@@ -167,7 +159,10 @@ function opciones (id_container,n_pregunta){
         }
         var answer_temp = e.target.id;
         var answer = answer_temp.substring(6,7);
+        
+        delete_options(container_opt.id,answer);
         update_answer(n_pregunta, parseInt(answer));
+        
         
     }
     container_opt.addEventListener("click", buttonGroupPressed);
@@ -175,3 +170,53 @@ function opciones (id_container,n_pregunta){
 
 }
 
+function delete_options(id_container, selOption){
+    //1. Select the container
+    alert('I am going to delete this ' + id_container);
+    var container = document.getElementById(id_container);
+    //2. delete the container
+    container.remove();
+    //3. add the selected answer to a message format and print
+    var message = message_format_builder(user_avatar);
+    var texto = document.createTextNode(selOption.toString());
+    var temp = message.firstChild;
+    temp.appendChild(texto);
+    var load =loading(user_avatar);
+    main.appendChild(load);
+    setTimeout(() => {
+        load.remove();
+        main.appendChild(message);
+    }, 2000);
+    
+}
+
+//*************************************************************Animations
+function button_animation (e){
+    let x = e.clientX - e.target.offsetLeft;
+    let y = e.clientY - e.target.offsetTop;
+
+    let ripples = document.createElement('span');
+    ripples.style.left = x + 'px';
+    ripples.style.top = y + 'px'
+    this.appendChild(ripples);
+}
+
+function loading (fromWho){
+    
+    var load = document.createElement('div');
+    var dot1 = document.createElement('span');
+    var dot2 = document.createElement('span');
+    var dot3 = document.createElement('span');
+
+    load.appendChild(dot1);
+    load.appendChild(dot2);
+    load.appendChild(dot3);
+    load.setAttribute('class', 'load');
+
+    var message = message_format_builder(fromWho);
+    var temp = message.firstChild;
+    temp.appendChild(load);
+
+    return message;
+    
+}

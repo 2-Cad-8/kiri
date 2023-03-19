@@ -34,6 +34,9 @@ button {
   background-color: #4CB3BF;
   color: #F2F4F5;
 }
+button span {
+  position: absolute;
+}
 body {
   background-color: #07365A;
   color: #F2F4F5;
@@ -104,12 +107,13 @@ body .main .optionsContainer {
   justify-content: center;
   flex-wrap: wrap;
   width: 70%;
-  margin: 5% 10% 5% 27%;
+  margin: 5% 10% 5% 16%;
 }
 body .main .optionsContainer button {
   margin: 0.625rem;
   height: 3.125rem;
   width: 3.125rem;
+  font-size: 1.25rem;
 }
 body .top-bar {
   background-color: #0074A1;

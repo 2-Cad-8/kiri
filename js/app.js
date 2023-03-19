@@ -1,4 +1,4 @@
-/*const APP = {
+const APP = {
     SW: null,
     DB: null, //TODO:
     init() {
@@ -101,4 +101,4 @@
     },
   };
   
-  document.addEventListener('DOMContentLoaded', APP.init);*/
+  document.addEventListener('DOMContentLoaded', APP.init);

@@ -1,3 +1,4 @@
+console.log('changes')
 /*const version = 1;
 let staticName = `staticCache-${version}`;
 let dynamicName = `dynamicCache`;

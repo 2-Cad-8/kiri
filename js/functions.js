@@ -5,18 +5,97 @@ import {
 } from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
 export let db = createStore('kiri','Preguntas');
 export const main = document.getElementById("main");
-export var preguntas = [
-    {   
+export const preguntas = [
+    /*1*/{   
         clave:"R",
         preguntas:"De tipo práctico que impliquen la manipulación de herramientas, instrumentos, máquinas y equipo",
         respuesta_u:0
     },
-    {
+    /*2*/{
         clave: 'I',
         preguntas:'De tipo científico tales como, elaboración de proyectos de investigación, lectura de revistas especializadas, resolución de problemas de las ciencias puras (física, biología, química o matemática)',
         respuesta_u:0
-    }
-
+    },
+    /*3*/{
+        clave: 'A',
+        preguntas:'Que permitan el desarrollo de la expresión creativa en la música, la literatura, las artes plásticas, escénicas y otras.',
+        respuesta_u:0
+    },
+    /*4*/{
+        clave: 'S',
+        preguntas:'De tipo humanitario que impliquen guiar, ayudar, educar, formar, asesorar y asistir a otros',
+        respuesta_u:0
+    },
+    /*5*/{
+        clave: 'E',
+        preguntas:'Encaminadas a dirigir a otras personas para el desarrollo de proyectos personales u organizacionales',
+        respuesta_u:0
+    },
+    /*6*/{
+        clave: 'C',
+        preguntas:'Relacionadas con el manejo detallado, ordenado y sistemático de datos e información',
+        respuesta_u:0
+    },
+    /*7*/{
+        clave: 'R',
+        preguntas:'Utilizar con destrezas herramientas e instrumentos, hacer reparaciones, elaborar dibujos técnicos, etc.',
+        respuesta_u:0
+    },
+    /*8*/{
+        clave: 'I',
+        preguntas:'Comprender el funcionamiento de diferentes máquinas, equipos, artefactos, interpretar formulas científicas y explicar teorías sobre fenómenos de la naturaleza.',
+        respuesta_u:0
+    },
+    /*9*/{
+        clave: 'A',
+        preguntas:'Utilizar o aplicar profesionalmente mi imaginación, sentimientos y gustos para interpretar y crear formas artísticas',
+        respuesta_u:0
+    },
+    /*10*/{
+        clave: 'S',
+        preguntas:'Comprender e interpretar la conducta humana, comunicarme con otros fácilmente y establecer relaciones interpersonales adecuadas para favorecer su bienestar integral',
+        respuesta_u:0
+    },
+    /*11*/{
+        clave: 'E',
+        preguntas:'Percibir las manifestaciones y necesidades ajenas, dirigir, controlar y planear las actividades de otros y utilizar un lenguaje convincente en la búsqueda de éxito y poder',
+        respuesta_u:0
+    },
+    /*12*/{
+        clave: 'C',
+        preguntas:'Organizar, clasificar, sistematizar cifras y documentos para cumplir eficientemente con planes preestablecidos',
+        respuesta_u:0
+    },
+    /*13*/{
+        clave: 'R',
+        preguntas:'Práctico, sincero, concreto, persistente, objetivo y retaido',
+        respuesta_u:0
+    },
+    /*14*/{
+        clave: 'I',
+        preguntas:'Analítico, racional, curioso, metódico, intelectual y crítico',
+        respuesta_u:0
+    },
+    /*15*/{
+        clave: 'A',
+        preguntas:'Idealista, intuitivo, sensible, creativo, imaginativo y liberal',
+        respuesta_u:0
+    },
+    /*16*/{
+        clave: 'S',
+        preguntas:'Comunicativo, afectuoso, servicial, comprensivo, cooperativo y flexible',
+        respuesta_u:0
+    },
+    /*17*/{
+        clave: 'E',
+        preguntas:'Constante, optimista, persuasivo, dominante, suspicaz y sociable',
+        respuesta_u:0
+    },
+    /*18*/{
+        clave: 'C',
+        preguntas:'Reservado, organizado, metódico, concreto, sistemático y conservador',
+        respuesta_u:0
+    },
 ]
 let user_avatar='maleUser';
 
@@ -45,7 +124,7 @@ export function search_question (i_preguntas){
 
   
 }
- function update_answer(i_preguntas, answer){
+ export function update_answer(i_preguntas, answer){
     get(i_preguntas.toString(),db)
         .then((datos)=>{
             
@@ -59,7 +138,7 @@ export function search_question (i_preguntas){
     
 }
 //*************************************************************DOM CREATIONS
- function print_question (seccion,pregunta,n_pregunta){
+ export function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
         part with a container for the options */
     const secciones_test = [
@@ -86,12 +165,14 @@ export function search_question (i_preguntas){
         optionsContainer.setAttribute('class','optionsContainer');
         optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
         main.appendChild(optionsContainer);
+        
         opciones(optionsContainer.id,n_pregunta);
+        
     }, 2000);
     
 }
     
- function message_format_builder(fromWho){
+ export function message_format_builder(fromWho){
     // it builds the format/visuals for the message
     
     var who;
@@ -137,7 +218,7 @@ export function search_question (i_preguntas){
      
 }
 
- function opciones (id_container,n_pregunta){
+ export function opciones (id_container,n_pregunta){
     /* Create from scratch the buttons 
     and add them directly to the container */
     var container_opt = document.getElementById(id_container);
@@ -153,6 +234,7 @@ export function search_question (i_preguntas){
     }
 
     const buttonGroupPressed = e => { 
+        alert('here is working')
         const isButton = e.target.nodeName === 'BUTTON';
         if(!isButton) {
             return;
@@ -162,17 +244,15 @@ export function search_question (i_preguntas){
         
         delete_options(container_opt.id,answer);
         update_answer(n_pregunta, parseInt(answer));
-        
-        
     }
     container_opt.addEventListener("click", buttonGroupPressed);
 
 
 }
 
-function delete_options(id_container, selOption){
+export function delete_options(id_container, selOption){
     //1. Select the container
-    alert('I am going to delete this ' + id_container);
+    
     var container = document.getElementById(id_container);
     //2. delete the container
     container.remove();
@@ -186,6 +266,8 @@ function delete_options(id_container, selOption){
     setTimeout(() => {
         load.remove();
         main.appendChild(message);
+        
+    
     }, 2000);
     
 }

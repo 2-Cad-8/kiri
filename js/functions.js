@@ -232,7 +232,7 @@ export function search_question (i_preguntas){
         new_button.setAttribute('id', 'opcion'+o);
         container_opt.appendChild(new_button);
     }
-
+    console.log(container_opt)
     const buttonGroupPressed = e => { 
         alert('here is working')
         const isButton = e.target.nodeName === 'BUTTON';

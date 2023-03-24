@@ -2,12 +2,23 @@
     padding:10%;
     /*padding:0.4375rem;*/
     position: center;
-
+    margin: 5%;
 }
 [class*="eicon-"]{
     display: block;
 }
 [class*="eicon-"]:before{
+
+    content: '';
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    background-repeat: no-repeat;
+    background-size:contain;
+    -webkit-background-size: contain;
+}
+
+button [class*="eicon-"]:before{
 
     content: '';
     display: block;

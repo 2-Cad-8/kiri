@@ -1,23 +1,9 @@
-import { search_question, 
-  preguntas, 
-  db, 
-  delete_options, 
-  message_format_builder, 
-  user_avatar,
-  loading,
-  normal_message,
-  user_info
- } from "./js/functions.js";
-import { set, get } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
-
-const startbtn = document.getElementById('start');
+import { search_question, preguntas, db, main} from "./js/functions.js";
+import { set, get} from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
+const startBtn = document.getElementById('start'); 
 const APP = {
-    SW: null,
-    DB: null, //TODO:
     init() {
-      APP.write_bd();
-      //APP.registerSW();
-      
+      APP.registerSW();
     },
     registerSW() {
       if ('serviceWorker' in navigator) {
@@ -69,14 +55,14 @@ const APP = {
       if (num <19){
        search_question(num);
         interval =setInterval(() => {
-         get(num.toString(),db).then((data) =>{ 
-                        if( data.respuesta_u != 0){
-                          num++;
-                          APP.test(num);
-                          clearInterval(interval);
-                        }
-                      })
-                      .catch(console.warn());
+          get(num.toString(),db).then((data) =>{ 
+            if( data.respuesta_u != 0){
+              num++;
+              APP.test(num);
+              clearInterval(interval);
+            }
+          })
+          .catch(console.warn());
        }, 4000);
       } else {
         alert('You have completed the test!');
@@ -87,24 +73,11 @@ const APP = {
   };
   
   window.addEventListener('load', (e) => {
- 
-   // createStore('Kiri','Perfil');
     APP.init();
-    //
-    startbtn.addEventListener('click', async()=>{
-      startbtn.remove()
-      normal_message('Hola..?',user_avatar);
-
-      setTimeout(()=>{
-        normal_message('Hola!', 'kiri')
-        
-      },2000)
-      setTimeout(()=>{
-        user_info();
-     
-      },4000)
-    })
-    //APP.test(1);
+    //console.log(startBtn);
+    APP.openDB();
+    APP.test(1);
     
 
 });
+

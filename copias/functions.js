@@ -3,14 +3,9 @@ import {
     get,
     createStore
 } from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
-
-//DOM ELEMENTS
-export const main = document.getElementById("main");
-const typingBox = document.getElementById("type_box");
-const sendBtn = document.getElementById('enviar');
-//BD STUFF
 export let db = createStore('kiri','Preguntas');
-export var preguntas = [
+export const main = document.getElementById("main");
+export const preguntas = [
     /*1*/{   
         clave:"R",
         preguntas:"De tipo práctico que impliquen la manipulación de herramientas, instrumentos, máquinas y equipo",
@@ -102,12 +97,8 @@ export var preguntas = [
         respuesta_u:0
     },
 ]
-export let user_avatar='maleUser';
-export let user ={
-    name: '',
-    sexo: '',
-    email: ''
-};
+let user_avatar='maleUser';
+
 
 /********************************************************************************************
  *                                          FUNCIONES
@@ -133,7 +124,7 @@ export function search_question (i_preguntas){
 
   
 }
- function update_answer(i_preguntas, answer){
+ export function update_answer(i_preguntas, answer){
     get(i_preguntas.toString(),db)
         .then((datos)=>{
             
@@ -147,7 +138,7 @@ export function search_question (i_preguntas){
     
 }
 //*************************************************************DOM CREATIONS
- function print_question (seccion,pregunta,n_pregunta){
+ export function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
         part with a container for the options */
     const secciones_test = [
@@ -168,21 +159,19 @@ export function search_question (i_preguntas){
     setTimeout(() => {
         load.remove();
         main.appendChild(message);
-        
 
         //container
         var optionsContainer = document.createElement('div');
         optionsContainer.setAttribute('class','optionsContainer');
         optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
-        
         main.appendChild(optionsContainer);
-        main.scrollTop = main.scrollHeight + 140;
+        
         opciones(optionsContainer.id,n_pregunta);
         
     }, 2000);
     
 }
-    //functions related to the test part
+    
  export function message_format_builder(fromWho){
     // it builds the format/visuals for the message
     
@@ -229,10 +218,9 @@ export function search_question (i_preguntas){
      
 }
 
- function opciones (id_container,n_pregunta){
+ export function opciones (id_container,n_pregunta){
     /* Create from scratch the buttons 
     and add them directly to the container */
-    
     var container_opt = document.getElementById(id_container);
     //Creating buttons
     for(var o = 1; o<7; o++){
@@ -243,10 +231,10 @@ export function search_question (i_preguntas){
         //SETTING ATTRIBUTES
         new_button.setAttribute('id', 'opcion'+o);
         container_opt.appendChild(new_button);
-        
     }
-    
+    console.log(container_opt)
     const buttonGroupPressed = e => { 
+        alert('here is working')
         const isButton = e.target.nodeName === 'BUTTON';
         if(!isButton) {
             return;
@@ -256,8 +244,6 @@ export function search_question (i_preguntas){
         
         delete_options(container_opt.id,answer);
         update_answer(n_pregunta, parseInt(answer));
-        
-        
     }
     container_opt.addEventListener("click", buttonGroupPressed);
 
@@ -278,113 +264,14 @@ export function delete_options(id_container, selOption){
     var load =loading(user_avatar);
     main.appendChild(load);
     setTimeout(() => {
-       
         load.remove();
         main.appendChild(message);
-        main.scrollTop = main.scrollHeight;
+        
+    
     }, 2000);
     
 }
-//any meesages
-export function normal_message(texto,fromwho){
-    var message = message_format_builder(fromwho);
-      var text = document.createTextNode(texto);
-      message.firstChild.appendChild(text);
-      var load  = loading(fromwho);
-      main.appendChild(load);
-      setTimeout(() => {
-        load.remove();
-        main.appendChild(message);
-      }, 2000);
-}
 
-function responder_dudas(){
-    // search the answer matching the doubts of the value of the option
-}
-
-export   function  user_info (){
-    //ask for user info
-    normal_message('¿Y tú? ¿Qué eres?', 'kiri');
-    //sex selection
-        var malebutton = document.createElement('div');
-        malebutton.setAttribute('id', 'maleUser');
-        malebutton.setAttribute('class', 'button-icon');
-        var femalebutton = document.createElement('div');
-        femalebutton.setAttribute('id', 'femUser');
-        femalebutton.setAttribute('class', 'button-icon');
-        //icons
-        var icon_male  = document.createElement('span');
-        var icon_female  = document.createElement('span');
-        icon_male.setAttribute('class', 'eicon-male-user');
-        icon_female.setAttribute('class', 'eicon-fem-user');
-        //containers
-        var icon_container_fem = document.createElement('div');
-        icon_container_fem.setAttribute('class','icon-container ');
-        icon_container_fem.appendChild(icon_female);
-
-         var icon_container_male = document.createElement('div');
-         icon_container_male.setAttribute('class','icon-container ');
-         icon_container_male.appendChild(icon_male);
-         //container
-         var optionsContainer = document.createElement('div');
-         optionsContainer.setAttribute('class','optionsContainer');
-         optionsContainer.setAttribute('id','optionsContainer');
-        //adding buttons
-        malebutton.appendChild(icon_container_male);
-        femalebutton.appendChild(icon_container_fem);
-        //SETTING ATTRIBUTES
-        
-        optionsContainer.appendChild(malebutton);
-        optionsContainer.appendChild(femalebutton);
-        setTimeout(()=>{
-            main.appendChild(optionsContainer)
-            malebutton.addEventListener('click', () =>{
-                user_avatar='maleUser';
-                user.sexo = 'maleUser';
-                optionsContainer.remove()
-            })
-            femalebutton.addEventListener('click', () =>{
-                user_avatar='femUser';
-                user.sexo = 'femUser';
-                optionsContainer.remove();
-            })
-        },4000)
-       
-     var interval = setInterval(() => {
-        if(user.sexo){
-            normal_message('¿Cuál es tu nombre?', 'kiri');
-            clearInterval(interval);
-            typingBox.focus();
-        }
-     }, 2000);
-        
-    //retrieve user info
-    sendBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        user.name = typingBox.value;
-        typingBox.value = '';
-    });
-    /*interval = setInterval(() => {
-        if(user.name){
-            normal_message(' Un gusto, ' + user.name, 'kiri');
-
-            setTimeout(() => {
-                normal_message('Oh, también dame tu correo por si acaso', 'kiri');
-                clearInterval(interval);
-                sendBtn.addEventListener('click', (e)=>{
-                    e.preventDefault();
-                    user.email = typingBox.value;
-                    typingBox.value = '';
-                    normal_message('', 'kiri');
-                }, 3000);
-            });
-        }
-    }, 2000);*/
-    
-     //saves data in the indexed
-    //block the input field
-    
-}
 //*************************************************************Animations
 function button_animation (e){
     let x = e.clientX - e.target.offsetLeft;
@@ -396,7 +283,7 @@ function button_animation (e){
     this.appendChild(ripples);
 }
 
-export function loading (fromWho){
+function loading (fromWho){
     
     var load = document.createElement('div');
     var dot1 = document.createElement('span');

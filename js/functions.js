@@ -10,6 +10,38 @@ const typingBox = document.getElementById("type_box");
 const sendBtn = document.getElementById('enviar');
 //BD STUFF
 export let db = createStore('kiri','Preguntas');
+export let userDB = createStore('kiri_user', 'user');
+export let doubtsDB = createStore('kiri_doubts', 'doubts');
+export let profileDB = createStore('kiri_profiles', 'profiles');
+
+export let profiles = [];
+export let doubts = [
+    /*1*/{
+        'duda': '¿Qué eres?',
+        'respuesta': 'Soy Kiri una aplicación móvil de test vocacional que te permitirá saber un poco más sobre ti y te dara un complemento de orientación vocacional a través de un test',
+        'estado': false
+    },
+    /*2*/{
+        'duda': '¿Qué es un test?',
+        'respuesta': 'Es una prueba o examen destinada a evaluar conocimientos, aptitudes o funciones. En este caso evaluare tus gustos e intereses',
+        'estado': false
+    },
+    /*3*/{
+        'duda': '¿Cómo funciona?',
+        'respuesta': 'Te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 ¿Practicamos? ',
+        'estado': false
+    },
+    /*4*/{
+        'duda': '¿Dónde puedo ver los resultados?',
+        'respuesta': ' Te los hare saber aquí mismo, pero también puedes verlos en tu perfil haciendo clic en tu avatar en la barra superior',
+        'estado': false
+    },
+    /*5*/{
+        'duda': '¿Puedo volver a hacer el test?',
+        'respuesta': 'Si, sin embargo los datos de tu test anterior se verán eliminados',
+        'estado': false
+    }
+];
 export var preguntas = [
     /*1*/{   
         clave:"R",
@@ -266,13 +298,17 @@ export function search_question (i_preguntas){
 
 export function delete_options(id_container, selOption){
     //1. Select the container
-    
+    var texto = '';
     var container = document.getElementById(id_container);
     //2. delete the container
     container.remove();
     //3. add the selected answer to a message format and print
     var message = message_format_builder(user_avatar);
-    var texto = document.createTextNode(selOption.toString());
+    
+    if(typeof(selOption) !== 'string'){
+    texto = document.createTextNode(selOption.toString());
+    }else {
+    texto =document.createTextNode(selOption);}
     var temp = message.firstChild;
     temp.appendChild(texto);
     var load =loading(user_avatar);
@@ -285,7 +321,7 @@ export function delete_options(id_container, selOption){
     }, 2000);
     
 }
-//any meesages
+//***************************************************any meesages
 export function normal_message(texto,fromwho){
     var message = message_format_builder(fromwho);
       var text = document.createTextNode(texto);
@@ -296,13 +332,73 @@ export function normal_message(texto,fromwho){
         load.remove();
         main.appendChild(message);
       }, 2000);
+      main.scrollTop = main.scrollHeight;
+}
+//there is only 2 types of answers besides the options at the beginning of the app
+//1- asking for a doubt in specific
+//2- asking to try again the test
+export function user_asnwer_options(n_options,textos,type){
+    //create the container
+    //append container to the main
+    //make answer options
+    var container = document.createElement('div');
+    container.setAttribute('class', 'optionsContainer');
+    container.setAttribute('id','optionsContainer');
+    main.append(container);
+
+    for(var o = 0; o< n_options; o++){
+        var texto =''
+        var new_button = document.createElement('button');
+        if(typeof(textos) == 'object'){
+            texto = document.createTextNode(textos[o]);
+            new_button.setAttribute('id', 'opcion'+textos[o]);
+        }else{
+            texto = document.createTextNode(textos);
+            new_button.setAttribute('id', 'opcion'+textos);
+        }
+        //CREATION OF TEXT
+        new_button.appendChild(texto);
+        //SETTING ATTRIBUTES
+        
+        new_button.setAttribute('class', 'user_answers');
+        container.appendChild(new_button);
+        
+    }
+    
+    const buttonGroupPressed = e => { 
+        const isButton = e.target.nodeName === 'BUTTON';
+        if(!isButton) {
+            return;
+        }
+        var answer_temp = e.target.id;
+        var answer = answer_temp.substring(6);
+        
+        delete_options(container.id,answer);
+        
+        if(type == 'doubt'){
+            responder_dudas(answer);
+        }else if (type == 'retake'){
+            alert('here should go the retake of the test')
+        }
+        
+        
+    }
+     container.addEventListener("click", buttonGroupPressed);
 }
 
-function responder_dudas(){
+ function responder_dudas(doubt){
     // search the answer matching the doubts of the value of the option
+    //go to the db and look for the answer for "doubt"
+    get(doubt, doubtsDB).then((data)=>{
+        // then print the answer and await for others
+        normal_message(data.respuesta,'kiri');
+        data.estado = true;
+        set(doubt,data,doubtsDB).then(console.log("updated")).catch(console.warn);
+    }).catch(console.warn())
+    
 }
 
-export   function  user_info (){
+export function  user_info (){
     //ask for user info
     normal_message('¿Y tú? ¿Qué eres?', 'kiri');
     //sex selection
@@ -342,28 +438,65 @@ export   function  user_info (){
                 user_avatar='maleUser';
                 user.sexo = 'maleUser';
                 optionsContainer.remove()
+                //replacing icon profile
+                var new_icon  = document.createElement('span');
+                new_icon.setAttribute('class','eicon-male-user')
+                var temp = document.getElementById('iconoP');
+                var parent = temp.parentNode;
+                parent.removeChild(temp);
+                parent.appendChild(new_icon)
             })
             femalebutton.addEventListener('click', () =>{
                 user_avatar='femUser';
                 user.sexo = 'femUser';
                 optionsContainer.remove();
+                //Replacing icon on the profile
+                var new_icon  = document.createElement('span');
+                new_icon.setAttribute('class','eicon-fem-user')
+                var temp = document.getElementById('iconoP');
+                var parent = temp.parentNode;
+                parent.removeChild(temp);
+                parent.appendChild(new_icon)
+                //temp.appendChild(new_icon);
             })
-        },4000)
+        },2000)
        
      var interval = setInterval(() => {
         if(user.sexo){
-            normal_message('¿Cuál es tu nombre?', 'kiri');
+            normal_message('Ya veo ¿Y cuál es tu nombre?', 'kiri');
+            main.scrollTop = main.scrollHeight;
             clearInterval(interval);
             typingBox.focus();
+
         }
      }, 2000);
         
     //retrieve user info
-    sendBtn.addEventListener('click', (e)=>{
+    const saving_name = (e) =>{
         e.preventDefault();
         user.name = typingBox.value;
         typingBox.value = '';
-    });
+        normal_message(user.name,user_avatar);
+        main.scrollTop = main.scrollHeight;
+
+        interval = setInterval(() =>{
+            if(user.name){
+                normal_message('Un gusto, '+ user.name, 'kiri');
+                clearInterval(interval);
+                main.scrollTop = main.scrollHeight;
+                typingBox.blur();
+                typingBox.disabled = true;
+                set('user_info', user, userDB)
+                .then(console.log('data sucessfully saved'))
+                .catch(console.warn)
+                sendBtn.removeEventListener('click',saving_name);
+                sendBtn.disabled = true;
+            }
+        },1000)
+    }
+    sendBtn.addEventListener('click', saving_name);
+
+    
     /*interval = setInterval(() => {
         if(user.name){
             normal_message(' Un gusto, ' + user.name, 'kiri');

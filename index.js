@@ -1,15 +1,22 @@
 import { search_question, 
   preguntas, 
   db, 
-  delete_options, 
-  message_format_builder, 
   user_avatar,
-  loading,
   normal_message,
-  user_info
+  user_info,
+  user,
+  user_asnwer_options,
+  doubts,
+  doubtsDB,
+  userDB
  } from "./js/functions.js";
 import { set, get } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 
+const dudas_btns = ['¿Qué es un test?',
+'¿Cómo funciona?',
+'¿Dónde puedo ver los resultados?',
+'¿Puedo volver a hacer el test?'
+]
 const startbtn = document.getElementById('start');
 const APP = {
     SW: null,
@@ -44,25 +51,23 @@ const APP = {
       }
     },
     write_bd(){
+      set('user_info',user,userDB)
+        .then(console.log('userdb created'))
+        .catch(console.warn);
       var i = 1;
-      for (let pregunta of preguntas){
+      for (let pregunta of preguntas){ //wrinting questions of the test
         set(i.toString(),pregunta,db)
         .then(console.log('question '+i+' written'))
         .catch(console.warn);
         i++;
       }
-    },
-    openDB() {
-      let req = indexedDB.open('kiri');
-      req.onsuccess = (ev) => {
-        APP.DB = ev.target.result;
-        APP.write_bd();
-        console.log('bd connected');
-       
-      };
-      req.onerror = (err) => {
-        console.warn();
-      };
+      i =1;
+      for (let doubt of doubts){//writing doubts
+        set(doubt.duda,doubt,doubtsDB)
+        .then(console.log('duda '+i+' written'))
+        .catch(console.warn);
+        i++;
+      }
     },
     async test(num){
       var interval;
@@ -100,9 +105,33 @@ const APP = {
         
       },2000)
       setTimeout(()=>{
-        user_info();
+        //options to ask for what is kiri
+        user_asnwer_options(1,'¿Qué eres?','doubt');
+        var interval = setInterval(() => {
+          get('¿Qué eres?',doubtsDB).then((data)=>{
+            if(data.estado){
+              clearInterval(interval);
+              setTimeout(() => {
+                user_info();
+              }, 2000);
+              
+            }
+          }).catch(console.warn)
+        }, 2000);
      
-      },4000)
+      },5000)
+
+      var interval = setInterval(()=>{
+        get('user_info',userDB).then((data)=>{
+          if(data.name != ''){
+            clearInterval(interval);
+            setTimeout(() => {
+              user_asnwer_options(4,dudas_btns,'doubt');
+            }, 2000);
+            
+          }
+        }).catch(console.warn)
+      }, 2000)
     })
     //APP.test(1);
     

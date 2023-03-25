@@ -44,6 +44,9 @@ button span {
   background-color: #4CB3BF;
   border-radius: 100%;
 }
+input:disabled {
+  background-color: #fff;
+}
 body {
   background-color: #07365A;
   color: #F2F4F5;

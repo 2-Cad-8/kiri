@@ -112,6 +112,11 @@ body .main .icon-message {
   background-color: #4CB3BF;
   border-radius: 100%;
 }
+body .main .user-answers {
+  border-radius: 50%;
+  background-color: #0074A1;
+  font-size: 0.9375rem;
+}
 body .optionsContainer {
   display: flex;
   align-items: center;

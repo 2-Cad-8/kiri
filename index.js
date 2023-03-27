@@ -10,10 +10,10 @@ import { search_question,
   doubtsDB,
   userDB
  } from "./js/functions.js";
-import { set, get } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
+import { set, get, getMany } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
+
 
 const dudas_btns = ['¿Qué es un test?',
-'¿Cómo funciona?',
 '¿Dónde puedo ver los resultados?',
 '¿Puedo volver a hacer el test?'
 ]
@@ -69,6 +69,31 @@ const APP = {
         i++;
       }
     },
+    dudas_preTest(){
+      var interval;
+        if(dudas_btns.length === 0){
+          clearInterval(interval);
+          alert("let's begin with the damned test yeeeessss")
+          //escribir codigo de instrucciones para comenzar el test 'instrucciones_test'
+          //Let's modify the como funciona question for 'instrucciones'
+          //so instead of go as a doubt, go here and explain the test
+          //ask to the user if they are ready
+          //if so start the test else wait
+        } else{
+            setTimeout(() => {
+              user_asnwer_options(1,dudas_btns[0],'doubt');
+              interval = setInterval(() => {
+                get(dudas_btns[0],doubtsDB).then((d) =>{
+                  if (d.estado){
+                    clearInterval(interval);
+                    dudas_btns.shift();
+                    setTimeout(() =>{APP.dudas_preTest();}, 1500)
+                  }
+                }).catch(console.warn)
+              }, 2000);
+            }, 2000)
+          }
+      },
     async test(num){
       var interval;
       if (num <19){
@@ -125,9 +150,23 @@ const APP = {
         get('user_info',userDB).then((data)=>{
           if(data.name != ''){
             clearInterval(interval);
-            setTimeout(() => {
-              user_asnwer_options(4,dudas_btns,'doubt');
-            }, 2000);
+            APP.dudas_preTest();
+            /*setTimeout(() => {
+              user_asnwer_options(1,dudas_btns[0],'doubt');
+              var interval = setInterval(() => {
+                get(dudas_btns[0]).then((d1) =>{
+                  if (!d1.estado){
+                    dudas_btns.shift();
+                    clearInterval(interval);
+                    setTimeout(() =>{
+                      user_asnwer_options(1,dudas_btns[0],'doubt');
+
+                    },4000)
+                    
+                  }
+                }).catch(console.warn)
+              }, 2000);
+            }, 2000);*/
             
           }
         }).catch(console.warn)

@@ -27,7 +27,7 @@ export let doubts = [
         'estado': false
     },
     /*3*/{
-        'duda': '¿Cómo funciona?',
+        'duda': 'instrucciones_test',
         'respuesta': 'Te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 ¿Practicamos? ',
         'estado': false
     },

@@ -112,12 +112,7 @@ body .main .icon-message {
   background-color: #4CB3BF;
   border-radius: 100%;
 }
-body .main .user-answers {
-  border-radius: 50%;
-  background-color: #0074A1;
-  font-size: 0.9375rem;
-}
-body .optionsContainer {
+body .main .optionsContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,15 +120,19 @@ body .optionsContainer {
   width: 70%;
   margin: 5% 10% 5% 16%;
 }
-body .optionsContainer .button-icon {
+body .main .optionsContainer .button-icon {
   margin-left: 7%;
   margin-right: 7%;
 }
-body .optionsContainer button {
+body .main .optionsContainer button {
   margin: 0.625rem;
   height: 3.125rem;
   width: 3.125rem;
-  font-size: 1.25rem;
+}
+body .main .optionsContainer button.user-answers {
+  border-radius: 10%;
+  background-color: #0074A1;
+  font-size: 0.9375rem;
 }
 .top-bar {
   background-color: #0074A1;

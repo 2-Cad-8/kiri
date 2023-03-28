@@ -73,12 +73,33 @@ const APP = {
       var interval;
         if(dudas_btns.length === 0){
           clearInterval(interval);
-          alert("let's begin with the damned test yeeeessss")
           //escribir codigo de instrucciones para comenzar el test 'instrucciones_test'
           //Let's modify the como funciona question for 'instrucciones'
           //so instead of go as a doubt, go here and explain the test
+          get('instrucciones_test',doubtsDB).then((data)=>{
+            normal_message(data.respuesta,'kiri');
+            data.estado = true;
+            set('instrucciones_test',data,doubtsDB).then(console.log('upadates isntructions state')).catch(console.warn);
+            
+            setTimeout(() => {
+              var answer = user_asnwer_options(2,['Si','No'],'test');
+              alert('volvi para aca'+answer);
+            },2000);
+            
+            var interval = setInterval(() => {
+              get('advertencia', doubtsDB).then((data) => {
+                 if(data.estado){
+                    clearInterval(interval);
+                    setTimeout(() =>{
+                      APP.test(1);
+                    },2000)
+                 }
+              }).catch(console.warn)
+              
+            }, 2000);
+          }).catch(console.warn);
           //ask to the user if they are ready
-          //if so start the test else wait
+           //if so start the test else wait
         } else{
             setTimeout(() => {
               user_asnwer_options(1,dudas_btns[0],'doubt');
@@ -120,6 +141,7 @@ const APP = {
  
    // createStore('Kiri','Perfil');
     APP.init();
+    
     //
     startbtn.addEventListener('click', async()=>{
       startbtn.remove()
@@ -151,28 +173,10 @@ const APP = {
           if(data.name != ''){
             clearInterval(interval);
             APP.dudas_preTest();
-            /*setTimeout(() => {
-              user_asnwer_options(1,dudas_btns[0],'doubt');
-              var interval = setInterval(() => {
-                get(dudas_btns[0]).then((d1) =>{
-                  if (!d1.estado){
-                    dudas_btns.shift();
-                    clearInterval(interval);
-                    setTimeout(() =>{
-                      user_asnwer_options(1,dudas_btns[0],'doubt');
-
-                    },4000)
-                    
-                  }
-                }).catch(console.warn)
-              }, 2000);
-            }, 2000);*/
             
           }
         }).catch(console.warn)
       }, 2000)
     })
     //APP.test(1);
-    
-
 });

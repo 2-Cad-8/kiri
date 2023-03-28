@@ -143,13 +143,6 @@ body {
             background-color: @light-blue;
             border-radius: 100%; 
         }
-        .user-answers{
-            border-radius: 50%;
-            background-color: @medium-blue;
-            font-size: 0.9375rem;
-        }
-}
-
         .optionsContainer{
             display: flex;
             align-items: center;
@@ -157,18 +150,32 @@ body {
             flex-wrap: wrap;
             width: 70%;
             margin: 5% 10% 5% 16%;
+
+            
+
             .button-icon{
                 margin-left:7%;
                 margin-right: 7%;
             }
+            
             button {
                 margin:0.625rem;
                 height: 3.125rem;
                 width: 3.125rem;
-                font-size: 1.25rem;
+                //font-size: 1.25rem;
+
+                &.user-answers{
+                    border-radius: 10%;
+                    background-color: @medium-blue;
+                    font-size: 0.9375rem;
+                }
             }
+            
 
         }
+}
+
+        
     }
     
     

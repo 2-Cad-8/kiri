@@ -28,7 +28,7 @@ export let doubts = [
     },
     /*3*/{
         'duda': 'instrucciones_test',
-        'respuesta': 'Te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 ¿Practicamos? ',
+        'respuesta': 'Te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 que tanto te identificas con cada una, siendo 1 para nada y 6 totalmente. ¿Comenzamos?',
         'estado': false
     },
     /*4*/{
@@ -39,6 +39,11 @@ export let doubts = [
     /*5*/{
         'duda': '¿Puedo volver a hacer el test?',
         'respuesta': 'Si, sin embargo los datos de tu test anterior se verán eliminados',
+        'estado': false
+    },
+    /*6*/{
+        'duda': 'advertencia',
+        'respuesta': 'Antes de continuar déjame aclarar que no soy algo que pueda reemplazar completamente la ayuda de un profesional en el área así que luego de realizar este test te invito a buscar la ayuda de uno si esta dentro de tus posibilidades. Ahora sí, ¡Comencemos!',
         'estado': false
     }
 ];
@@ -379,6 +384,22 @@ export function user_asnwer_options(n_options,textos,type){
             responder_dudas(answer);
         }else if (type == 'retake'){
             alert('here should go the retake of the test')
+        }else if (type == 'test'){
+            alert(answer);
+            if(answer == 'Si' || answer == '¡Comencemos!'){
+                
+                get('advertencia',doubtsDB).then((data)=>{
+                  normal_message(data.respuesta,'kiri');
+                  data.estado = true;
+                  set('advertencia',data, doubtsDB).then(console.log('test flag true'))
+                }).catch(console.warn)
+              }else if (answer == 'No'){
+                
+                setTimeout(() => {
+                    user_asnwer_options(1,'¡Comencemos!','test')
+                }, 2000);
+               
+              }
         }
         
         

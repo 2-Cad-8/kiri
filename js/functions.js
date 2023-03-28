@@ -347,8 +347,9 @@ export function user_asnwer_options(n_options,textos,type){
     //append container to the main
     //make answer options
     var container = document.createElement('div');
-    container.setAttribute('class', 'optionsContainer');
     container.setAttribute('id','optionsContainer');
+    container.setAttribute('class', 'optionsContainer');
+    
     main.append(container);
 
     for(var o = 0; o< n_options; o++){

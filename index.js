@@ -8,9 +8,13 @@ import { search_question,
   user_asnwer_options,
   doubts,
   doubtsDB,
-  userDB
+  userDB,
+  calc_results,
+  keys,
+  profileDB,
+  profiles
  } from "./js/functions.js";
-import { set, get, getMany } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
+import { set, get,  } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 
 
 const dudas_btns = ['¿Qué es un test?',
@@ -65,6 +69,13 @@ const APP = {
       for (let doubt of doubts){//writing doubts
         set(doubt.duda,doubt,doubtsDB)
         .then(console.log('duda '+i+' written'))
+        .catch(console.warn);
+        i++;
+      }
+      var i = 1;
+      for (let profile of profiles){ //wrinting profiles of the test
+        set(profile.clave,profile,profileDB)
+        .then(console.log('Profiles written'))
         .catch(console.warn);
         i++;
       }
@@ -130,18 +141,94 @@ const APP = {
                       .catch(console.warn());
        }, 4000);
       } else {
-        alert('You have completed the test!');
-        
+        var clave_temp =['','','',''];
         clearInterval(interval);
+        calc_results(keys);
+        /*
+          1 Hemos terminado!
+          2 K: Tienes una clave *asc*, es decir tienes características de los perfiles de *artista, social y convencional*
+          3,4,5 K: Tu perfil principal es artista el cual *definición* por lo que carreras como *carreras* serían de gran disfrute para ti, adicional cuentas con otros dos perfiles que podrías seguir si asi lo deseas loscuales son Social *definición* *posibles carreras* y junto con *definciion perfil * carreras*
+          6 K: Recuerda que siempre puedes volver a hacer el test, sin embargo te recomiendo siempre consultar a un profesional en el area si tienes la posibilidad, ellos te permitirán profundizar mas en tus metas y tu visión a futuro.
+          7 K: Los resultados que obtuviste hoy no son una etiqueta permanente, sencillamente es una guía y puedes tener características de otros perfiles, solo que alguno de ellos puede dominar por encima del resto una mayor parte del tiempo
+          8 K: Si quieres repetir el test puedes ir a tu perfil y dar clic en el botón “hacer de nuevo”, recuerda que tus datos serán eliminados, piénsalo bien
+
+        */
+        setTimeout(() => {
+          normal_message('¡Hemos terminado!','kiri');
+          setTimeout(() => {
+            //add claves
+            get('user_info',userDB).then((data)=>{
+              clave_temp[0] = data.resultados[0].clave +data.resultados[1].clave  + data.resultados[2].clave 
+              clave_temp[1] = data.resultados[0].nombre_perfil;
+              clave_temp[2] = data.resultados[1].nombre_perfil;
+              clave_temp[3] = data.resultados[2].nombre_perfil;
+            })
+             var claves_perfil_nombre = 'Tienes una clave '+  +', es decir tienes características de los perfiles de *artista, social y convencional*'; 
+            
+            //name of claves
+            normal_message('¡Hemos terminado!','kiri');
+          }, 1000);
+        }, 2000); 
       }
     }
   };
   
   window.addEventListener('load', (e) => {
  
-   // createStore('Kiri','Perfil');
-    APP.init();
-    
+   
+   // APP.init();
+   setTimeout(() => {
+    normal_message('¡Hemos terminado!','kiri');
+    setTimeout(() => {
+      var clave_temp= ['',{
+        nombre:'',
+        definicion: '',
+        carreras: ''
+      },
+      {
+        nombre:'',
+        definicion: '',
+        carreras: ''
+      },
+      {
+        nombre:'',
+        definicion: '',
+        carreras: ''
+      }];
+      //add claves
+      get('user_info',userDB).then((data)=>{
+        //clave y nombres
+        clave_temp[0] = data.resultados[0].clave +data.resultados[1].clave  + data.resultados[2].clave 
+        clave_temp[1].nombre = data.resultados[0].nombre_perfil;
+        clave_temp[2].nombre = data.resultados[1].nombre_perfil;
+        clave_temp[3].nombre = data.resultados[2].nombre_perfil;
+        //descripcion
+        clave_temp[1].definicion = data.resultados[0].descripcion;
+        clave_temp[2].definicion = data.resultados[1].descripcion;
+        clave_temp[3].definicion = data.resultados[2].descripcion;
+        //carreras
+        clave_temp[1].carreras = data.resultados[0].carreras;
+        clave_temp[2].carreras = data.resultados[1].carreras;
+        clave_temp[3].carreras = data.resultados[2].carreras;
+      })
+        
+      //name of claves
+      var interval =setInterval(() => {
+          if(clave_temp[0] !=''){
+            clearInterval(interval);
+            var claves_perfil_nombre = 'Tienes una clave: '+ clave_temp[0] +', es decir tienes características de los perfiles de: '+ clave_temp[1].nombre+ ', '+clave_temp[2].nombre+ ', '+clave_temp[3].nombre; 
+            normal_message(claves_perfil_nombre,'kiri');
+
+            //message 3
+            setTimeout(() => {
+              var resultado_1 = 'Tu perfil principal es '+ clave_temp[1].nombre+' es decir: '+ clave_temp[1].definicion+ ' por lo que carreras como '+ clave_temp[1].carreras+' serían de gran disfrute para ti'; 
+              normal_message(resultado_1,'kiri');
+            }, 2000);
+          }
+      }, 1000);
+     
+    }, 2000);
+  }, 2000); 
     //
     startbtn.addEventListener('click', async()=>{
       startbtn.remove()
@@ -178,5 +265,6 @@ const APP = {
         }).catch(console.warn)
       }, 2000)
     })
-    //APP.test(1);
+    
+
 });

@@ -1,21 +1,93 @@
 import {
     set, 
     get,
-    createStore
+    createStore,
+    
 } from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
+
 
 //DOM ELEMENTS
 export const main = document.getElementById("main");
 const typingBox = document.getElementById("type_box");
 const sendBtn = document.getElementById('enviar');
 //BD STUFF
+export let keys =[
+    {clave:'A',
+    puntaje: 0},
+    {clave:'C',
+    puntaje: 0},
+    {clave:'S',
+    puntaje: 0},
+    {clave:'E',
+    puntaje: 0},
+    {clave:'I',
+    puntaje: 0},
+    {clave:'R',
+    puntaje: 0}
+    
+]
 export let db = createStore('kiri','Preguntas');
 export let userDB = createStore('kiri_user', 'user');
 export let doubtsDB = createStore('kiri_doubts', 'doubts');
 export let profileDB = createStore('kiri_profiles', 'profiles');
 
-export let profiles = [];
-export let doubts = [
+export const profiles = [
+    /*1*/{
+        nombre_perfil:'Realista',
+        clave: 'R',
+        carreras: 'Ingeniería, Arquitectura, Gastronomía, Policía, Deportes, Agronomía, Agricultura, Aviación Mecánica, Técnicos en reparación, Topografía, Carpintería, Conductores, Corte y confección, Veterinaria',
+        descripcion: 'Este perfil se refiere a personas que se destacan por sus capacidades mecánicas y deportivas. Prefieren trabajar con maquinaria, equipamiento, plantas y animales. Es posible que también les guste trabajar fuera de una oficina',
+        evitan:'La pasividad y dejar que otros resuelvan asuntos que pueden desarrollar por si mismos',
+        intereses: 'Involucra la necesidad implicación física en su trabajo, lejos de la pasividad de la oficina, y/o la necesidad de ejercer una actividad al aire libre o permitiendo conservar un lazo estrecho con la naturaleza',
+        motivaciones:'Realizar cosas de manera concreta, hacer objetos o ejercer una actividad que implica el uso de sus manos o de herramientas y técnicas manuales. Voluntad de no conformase solamente de una función intelectual y puramente conceptual',
+    },
+    /*2*/{
+        nombre_perfil:'Artístico',
+        clave: 'A',
+        carreras: 'Literatura, Comunicación, Diseño gráfico, Mercadotecnia, Medio artístico, Floristas, Fotografía, Arquitectura (diseño de interiores), Artes plásticas, Intérprete, Medios audiovisuales, Periodismo, Área infantil (trabajo con niños), Danza',
+        descripcion: 'Este perfil incluye a las personas que aprecian las cualidades estéticas que expresan a través de su trabajo artístico y literario. Se caracterizan por su  flexibilidad y no conformidad o compromiso con un sistema específico',
+        evitan:'La rutina, el conformismo, el no debatir ideas, los prejuicios, las actividades de cálculo, la técnica y las ciencias, las actividades físicas.',
+        intereses: 'Los símbolos, el futuro, la originalidad, los conceptos y su concreción, la estética, las emociones y su representación.',
+        motivaciones:'Crear, redactar, razonar por analogía, dibujar, imaginar, percibir, innovar, debatir, cuestionar el conformismo',
+    },
+    /*3*/{
+        nombre_perfil:'Investigador /Intelectual',
+        clave: 'I',
+        carreras: 'Química, Docencia, Informática, Farmacéutica, Medicina, Matemática, Odontología, Psicología, Nutrición, Ingeniería (enfocada a investigaciones y logística), Historia, Criminalística, Programación, Veterinaria, Inteligencia analítica',
+        descripcion: 'Este perfil representa a los que prefieren profesiones científicas e intelectuales. Disfrutan de reunir información, identificar teorías o hechos y  analizar e interpretar información.',
+        evitan:'La falta de profesionalismo, la imprecisión, la incompetencia, la cotidianidad, la subjetividad',
+        intereses: 'La tecnicidad, la precisión, la profesionalidad, el rigor, y el sentido del detalle, la enseñanza, las ciencias, los métodos novedosos',
+        motivaciones:'Desarrollar y valorar competencias, aconsejar a individuos o a empresas sobre estas áreas, investigar, transmitir conocimiento',
+    },
+    /*4*/{
+        nombre_perfil:'Social',
+        clave: 'S',
+        carreras: 'Docencia, Enfermería, Comunicación Social, Turismo, Sociología, Recursos humanos (Administración), Asistencia legal (Derecho),  Trabajo social, Terapeutas, Servicio al cliente, Coaching deportivo, Consejeros/Orientadores, Área comunitaria, Conferenciantes y motivadores, Relaciones públicas, Terapia del lenguaje',
+        descripcion: 'Este perfil representa a las personas sociales que disfrutan al ayudar a otros. Prefieren trabajar en grupos y se caracterizan también por sus grandes habilidades de comunicación.',
+        evitan:'La ausencia de contactos con el entorno exterior, el trabajo solitario. El mercantilismo, el individualismo, el hecho de no hacer nada por mejorar la vida de otros',
+        intereses: 'Las buenas relaciones, los viajes y las otras culturas, las negociaciones, el ambiente de trabajo. La empatía, las relaciones humanas, el bienestar personal, la psicología, la medicina, el humanismo, la justicia',
+        motivaciones:'Explicar, negociar, presentar, aconsejar y vender, tener contactos, comunicarse con los clientes o colegas, Ayudar a otros, prestar servicios, escuchar, informar, formar, ayudar a cada uno a progresar, aconsejar y orientar',
+    },
+    /*5*/{
+        nombre_perfil:'Emprendedor',
+        clave: 'E',
+        carreras: 'Derecho, Comercio exterior y aduanas, Administración de empresas, Turismo, Ciencias políticas, Negocios internacionales, Mercadotecnia o Marketing Chefs (Gastronomía ) Medicina, Odontología, Coaching ejecutivo / Consultoría, Jefes de policía o bomberos, Bienes raíces, Todo lo que tenga que ver con ventas, Medios sociales (influencers, bloggers, etc.), Asesoría financiera',
+        descripcion: 'Este perfil incluye a las personas con personalidad administrativa. Pueden conectar eficientemente sus ideas y opiniones con los demás y persuadirlos. Además, confían mucho en sí mismos y tienen la energía necesaria para lograr sus aspiraciones.',
+        evitan:'La ausencia de responsabilidades, la imposibilidad de tomar decisiones, supervisores demasiado controladores. La inmovilidad y la inacción, trabajar encerrado en un despacho, falta de iniciativa',
+        intereses: 'La administración, las orientaciones estratégicas, la dirección de proyectos. La acción a corto plazo, la aventura, la toma de riesgos, los negocios y le beneficio, las nuevas modas',
+        motivaciones:'Animar una reunión, supervisar motivar a los colaboradores, manejar conflictos, reconciliar, convencer, planear acciones, decidir y tomar acción. Improvisar, gestionar las urgencias, trabajar sobre la marcha, desarrollar nuevas actividades, materializar proyectos o ideas, conseguir ventas, lanzar desafíos',
+    },
+      /*6*/{
+        nombre_perfil:'Convencional',
+        clave: 'C',
+        carreras: 'Administración de empresas, Contabilidad, Economía, Finanzas, Función pública, Mercadotecnia, Logística internacional, Control de tráfico, Informática, Organización y Coordinación de eventos, Gestión de proyectos, Planeación estratégica, Matemáticas, Auditorías',
+        descripcion: 'Son aquellas personas con un alto grado de control y que prefieren trabajar con  números y cifras. Son precisos en su trabajo y siempre cumplen las normas, leyes y reglamentos laborales.',
+        evitan:'El cambio repentino, la improvisación frente a situaciones importantes, la falta de métodos o medios.',
+        intereses: 'La informática, las reglas y las convenciones,  los métodos, la anticipación de acontecimientos, el cuidado del detalle, la eficacia',
+        motivaciones:'Organizar, planificar rigurosamente las actividades, aplicar métodos o reglas de gestión, controlar la calidad, estructurar y clasificar la información',
+    },
+];
+export const doubts = [
     /*1*/{
         'duda': '¿Qué eres?',
         'respuesta': 'Soy Kiri una aplicación móvil de test vocacional que te permitirá saber un poco más sobre ti y te dara un complemento de orientación vocacional a través de un test',
@@ -143,7 +215,10 @@ export let user_avatar='maleUser';
 export let user ={
     name: '',
     sexo: '',
-    email: ''
+    email: '',
+    resultados: [{},{},{}],
+    resultados_pKey: {}, //resultados per key
+   
 };
 
 /********************************************************************************************
@@ -183,6 +258,87 @@ export function search_question (i_preguntas){
         }).catch(console.warn);
     
 }
+
+export function calc_results (keys){
+    /* Calcula los resultados obtenidos en el test */
+    
+    for (var i = 1; i<19; i++){
+        get(i.toString(),db).then((data) =>{ 
+            switch (data.clave){
+                case 'A':
+                    keys[0].puntaje += parseInt(data.respuesta_u);
+                break;
+                case 'C':
+                    keys[1].puntaje += parseInt(data.respuesta_u);
+                break;
+                case 'S':
+                    keys[2].puntaje += parseInt(data.respuesta_u);
+                break;
+                case 'E':
+                    keys[3].puntaje += parseInt(data.respuesta_u);
+                break;    
+                case 'I':
+                    keys[4].puntaje += parseInt(data.respuesta_u);
+                break;
+                case 'R':
+                    keys[5].puntaje += parseInt(data.respuesta_u);
+                break;    
+            }
+          
+        })
+        
+        
+    }
+    //organize results
+    var interval = setInterval(() => {
+        if(keys[0].puntaje != 0){
+            //if puntaje it's different from zero then calculate else keep checking
+            clearInterval(interval)
+            keys.sort((a,b) =>{
+                return b.puntaje -a.puntaje;
+            })
+            user.resultados_pKey = keys;
+            
+            //Retrieving the data of each profile 
+            var interval2 = setInterval(() => {
+                if(user.resultados_pKey[0].clave != ''){
+                    clearInterval(interval2);
+                    for (let i = 0; i<3; i++){
+                        get(keys[i].clave,profileDB).then((data) => {
+                            user.resultados[i] = data;
+                        }).catch(console.error);
+                    }
+                    
+                    //UPDATING THE USER INFO RESULTS AND GENERAL RESULTS
+                    get('user_info',userDB).then((data)=>{
+                        var i = 0;
+                        for(let result of user.resultados){
+                            data.resultados[i] = result;
+                            i++
+                        }
+                        data.resultados_pKey = keys;
+                        set('user_info',data,userDB).then(console.log('updated result'))
+                    })
+                }
+            }, 2000);
+        }
+    }, 2000);
+   
+    //now we need to identify the three highest results
+    
+    
+    /*var interval = setInterval(() => {
+        if (user.resultados[0].clave != ''){
+
+        }
+    }, 2000);
+    console.log(user.resultados);*/
+    
+    //update results within user db
+        //make objects for each profile
+    
+}
+
 //*************************************************************DOM CREATIONS
  function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
@@ -541,15 +697,6 @@ export function  user_info (){
     
 }
 //*************************************************************Animations
-function button_animation (e){
-    let x = e.clientX - e.target.offsetLeft;
-    let y = e.clientY - e.target.offsetTop;
-
-    let ripples = document.createElement('span');
-    ripples.style.left = x + 'px';
-    ripples.style.top = y + 'px'
-    this.appendChild(ripples);
-}
 
 export function loading (fromWho){
     

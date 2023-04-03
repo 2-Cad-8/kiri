@@ -31,7 +31,7 @@ button {
   min-width: 2.375rem;
   padding: 0.3125rem;
   border-radius: 90%;
-  background-color: #4CB3BF;
+  background-color: #4cb3bf;
   color: #F2F4F5;
 }
 button span {
@@ -41,7 +41,7 @@ button span {
   position: relative;
   width: 3.75rem;
   height: 3.75rem;
-  background-color: #4CB3BF;
+  background-color: #4cb3bf;
   border-radius: 100%;
 }
 input:disabled {
@@ -66,7 +66,7 @@ body .main .message-group {
 }
 body .main .message-group .message-format {
   width: fit-content;
-  background: #4CB3BF;
+  background: #4cb3bf;
   border-radius: 0.3125rem;
   padding: 0.4375rem 1.25rem 0.4375rem;
 }
@@ -95,6 +95,7 @@ body .main .message-group .message-format .load span:nth-child(3) {
   }
 }
 body .main .message-group .message-format.kiri {
+  background-color: #3F79A6;
   margin: 0.3125rem 3%;
   padding-right: 0.625rem;
   padding-left: 0.4375rem;
@@ -109,7 +110,7 @@ body .main .message-group .message-format.user {
 body .main .icon-message {
   width: 2.1875rem;
   height: 2.1875rem;
-  background-color: #4CB3BF;
+  background-color: #4cb3bf;
   border-radius: 100%;
 }
 body .main .optionsContainer {
@@ -125,14 +126,18 @@ body .main .optionsContainer .button-icon {
   margin-right: 7%;
 }
 body .main .optionsContainer button {
-  margin: 0.625rem;
-  height: 3.125rem;
-  width: 3.125rem;
+  margin-left: 0.625rem;
+  min-height: 3.125rem;
+  min-width: 3.125rem;
+  border-radius: 0.4375rem;
+  padding: 0 2%;
+  background-color: #0074A1;
+  font-size: 1rem;
+  margin-bottom: 5%;
 }
 body .main .optionsContainer button.user-answers {
-  border-radius: 10%;
-  background-color: #0074A1;
-  font-size: 0.9375rem;
+  width: 4.375rem;
+  height: fit-content;
 }
 .top-bar {
   background-color: #0074A1;
@@ -162,7 +167,7 @@ body .main .optionsContainer button.user-answers {
   flex-grow: 7;
 }
 .top-bar .container .perfil {
-  background-color: #4CB3BF;
+  background-color: #4cb3bf;
   width: 3.125rem;
   /* 40px */
   height: 3.125rem;

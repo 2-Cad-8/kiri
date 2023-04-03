@@ -5,7 +5,7 @@ import {
     
 } from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
 
-
+export var retake_test_flag = false;
 //DOM ELEMENTS
 export const main = document.getElementById("main");
 const typingBox = document.getElementById("type_box");
@@ -182,7 +182,7 @@ export var preguntas = [
     },
     /*13*/{
         clave: 'R',
-        preguntas:'Práctico, sincero, concreto, persistente, objetivo y retaido',
+        preguntas:'Práctico, sincero, concreto, persistente, objetivo y retraído',
         respuesta_u:0
     },
     /*14*/{
@@ -224,24 +224,35 @@ export let user ={
 /********************************************************************************************
  *                                          FUNCIONES
  ********************************************************************************************/
-export function search_question (i_preguntas){
+export async function search_question (i_preguntas){
     //search a question by its id and prints it
     //variables
     var id = i_preguntas.toString();
     var section;
     /* section check*/
-    if(i_preguntas >= 1 || i_preguntas <= 6){
+    const define_section = (i_preguntas) =>{ 
+        var section;
+        if(i_preguntas >= 1 && i_preguntas <= 6){
+           
         section = 0;
-    }else if(i_preguntas >= 7 || i_preguntas <= 12){
-        section = 1;
-    }else if(i_preguntas >= 13 || i_preguntas <= 18){
-        section = 2;
+        return section;
+        }else if(i_preguntas >= 7 && i_preguntas <= 12){
+            
+            section = 1;
+            return section;
+        }else if(i_preguntas >= 13 && i_preguntas <= 18){
+           
+            section = 2;
+            return section;
+        }   
     }
-
-    get(id,db)
-    .then((pregunta) =>{
-        print_question(section,pregunta.preguntas,id);
-    }).catch(console.warn())
+         section = await define_section(i_preguntas);
+            get(id,db)
+            .then((pregunta) =>{
+                print_question(section,pregunta.preguntas,id);
+            }).catch(console.warn())
+        
+    
 
   
 }
@@ -343,6 +354,7 @@ export function calc_results (keys){
  function print_question (seccion,pregunta,n_pregunta){
     /* Creates a new element that contains the question and add it to the main
         part with a container for the options */
+        console.log('estamos en la seccion: '+seccion)
     const secciones_test = [
         'Tengo interes por realizar actividades',
         'Estoy seguro(a) de poder',
@@ -369,7 +381,8 @@ export function calc_results (keys){
         optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
         
         main.appendChild(optionsContainer);
-        main.scrollTop = main.scrollHeight + 140;
+        window.scrollBy(0,window.scrollHeight);
+         //= main.scrollHeight + 140;
         opciones(optionsContainer.id,n_pregunta);
         
     }, 2000);
@@ -478,7 +491,8 @@ export function delete_options(id_container, selOption){
        
         load.remove();
         main.appendChild(message);
-        main.scrollTop = main.scrollHeight;
+        window.scrollBy(0,window.scrollHeight);
+        //main.scrollTop = main.scrollHeight;
     }, 2000);
     
 }
@@ -493,7 +507,8 @@ export function normal_message(texto,fromwho){
         load.remove();
         main.appendChild(message);
       }, 2000);
-      main.scrollTop = main.scrollHeight;
+      window.scrollBy(0,window.scrollHeight);
+      //main.scrollTop = main.scrollHeight;
 }
 //there is only 2 types of answers besides the options at the beginning of the app
 //1- asking for a doubt in specific
@@ -540,9 +555,10 @@ export function user_asnwer_options(n_options,textos,type){
         if(type == 'doubt'){
             responder_dudas(answer);
         }else if (type == 'retake'){
-            alert('here should go the retake of the test')
+            retake_test_flag = true;
+            
         }else if (type == 'test'){
-            alert(answer);
+           
             if(answer == 'Si' || answer == '¡Comencemos!'){
                 
                 get('advertencia',doubtsDB).then((data)=>{
@@ -642,7 +658,8 @@ export function  user_info (){
      var interval = setInterval(() => {
         if(user.sexo){
             normal_message('Ya veo ¿Y cuál es tu nombre?', 'kiri');
-            main.scrollTop = main.scrollHeight;
+            window.scrollBy(0,window.scrollHeight);
+            //main.scrollTop = main.scrollHeight;
             clearInterval(interval);
             typingBox.focus();
 
@@ -655,13 +672,14 @@ export function  user_info (){
         user.name = typingBox.value;
         typingBox.value = '';
         normal_message(user.name,user_avatar);
-        main.scrollTop = main.scrollHeight;
-
+        //main.scrollTop = main.scrollHeight;
+        window.scrollBy(0,window.scrollHeight);
         interval = setInterval(() =>{
             if(user.name){
                 normal_message('Un gusto, '+ user.name, 'kiri');
                 clearInterval(interval);
-                main.scrollTop = main.scrollHeight;
+                window.scrollBy(0,window.scrollHeight);
+                //main.scrollTop = main.scrollHeight;
                 typingBox.blur();
                 typingBox.disabled = true;
                 set('user_info', user, userDB)

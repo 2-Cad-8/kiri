@@ -2,7 +2,8 @@
 @colorprincipal:#fff;
 @background: #07365A;
 @medium-blue: #0074A1;
-@light-blue: #4CB3BF;
+@kiri-msg:#3F79A6;//156770 ;
+@light-blue: #4cb3bf;
 @white: #F2F4F5;
 @title: 'Open Sans', sans-serif;
 @small_text: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifso;
@@ -119,6 +120,7 @@ body {
                 }
                 &.kiri{
                     //margin-left:14%;
+                    background-color: @kiri-msg;
                     margin:0.3125rem 3%; 
                     padding-right: 0.625rem;
                     padding-left: 0.4375rem;
@@ -129,7 +131,7 @@ body {
                     background-color: @medium-blue;
                     margin:0.3125rem 3% 0.3125rem auto;
                     padding-left: 0.625rem;
-                    padding-right: 0.625rem;
+                    padding-right: 0.625rem;//0.625rem is the original
                     
                 }
                 
@@ -150,24 +152,26 @@ body {
             flex-wrap: wrap;
             width: 70%;
             margin: 5% 10% 5% 16%;
-
-            
-
             .button-icon{
                 margin-left:7%;
                 margin-right: 7%;
             }
             
             button {
-                margin:0.625rem;
-                height: 3.125rem;
-                width: 3.125rem;
+                //margin:0.625rem;
+                margin-left: 0.625rem;
+                min-height: 3.125rem;
+                min-width: 3.125rem;
+                border-radius: 0.4375rem;
+                padding: 0 2%;
+                background-color: @medium-blue;
+                font-size: 1rem;
+                margin-bottom: 5%;
                 //font-size: 1.25rem;
 
                 &.user-answers{
-                    border-radius: 10%;
-                    background-color: @medium-blue;
-                    font-size: 0.9375rem;
+                    width: 4.375rem;
+                    height: fit-content;
                 }
             }
             

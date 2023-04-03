@@ -94,7 +94,7 @@ const APP = {
             set('instrucciones_test',data,doubtsDB).then(console.log('upadates isntructions state')).catch(console.warn);
             
             setTimeout(() => {
-              var answer = user_asnwer_options(2,['Si','No'],'test');
+             user_asnwer_options(2,['Si','No'],'test');
              
             },2000);
             

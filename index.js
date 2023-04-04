@@ -181,11 +181,14 @@ const APP = {
               clave_temp[2].carreras = data.resultados[1].carreras;
               clave_temp[3].carreras = data.resultados[2].carreras;
             })
-            //reducing careers
-          /*  for(let i = 1; i <4; i++){
-              clave_temp[i].carreras = clave_temp[i].carreras.split(',');
-              
-            }*/
+            //reducing the definition
+            for(let i = 1; i<4; i++){
+              var temp_num;
+              var temp_newText;
+              temp_num = clave_temp[i].definicion.indexOf('.');
+              temp_newText = clave_temp[i].definicion.substring(0,temp_num);
+              clave_temp[i].definicion =temp_newText;
+            }
             //name of claves
             
                 if(clave_temp[0] !=''){
@@ -196,19 +199,19 @@ const APP = {
                   //message 3
                   setTimeout(() => {
                     var resultado_1_def = 'Tu perfil principal es '+ clave_temp[1].nombre+' es decir: '+ clave_temp[1].definicion;
-                    var resultado_1_car = 'por lo que carreras como '+ clave_temp[1].carreras+', y otras similares serían de gran disfrute para ti'; 
+                    var resultado_1_car = 'por lo que carreras como '+ clave_temp[1].carreras[0]+', '+clave_temp[1].carreras[1]+', '+clave_temp[1].carreras[2]+', y otras similares serían de gran disfrute para ti'; 
                     normal_message(resultado_1_def,'kiri');
                     normal_message(resultado_1_car,'kiri');
                     //message 4
                     setTimeout(() => {
                       var resultado_2_def = 'adicional cuentas con un segundo perfil: '+ clave_temp[2].nombre+': '+ clave_temp[2].definicion;
-                      var resultado_2_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[2].carreras+', y otras similares.'; 
+                      var resultado_2_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[2].carreras[0]+', '+clave_temp[2].carreras[1]+', '+clave_temp[2].carreras[2]+', y otras similares.'; 
                       normal_message(resultado_2_def,'kiri');
                       normal_message(resultado_2_car,'kiri');
                       //message 5
                       setTimeout(() => {
                         var resultado_3_def = 'Por ultimo también cuentas con un perfil '+ clave_temp[3].nombre+': '+ clave_temp[3].definicion;
-                        var resultado_3_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[3].carreras+', y otras similares.'; 
+                        var resultado_3_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[3].carreras[0]+', '+clave_temp[3].carreras[1]+', '+clave_temp[3].carreras[2]+', y otras similares.'; 
                         normal_message(resultado_3_def,'kiri');
                         normal_message(resultado_3_car,'kiri');
                         //message 6
@@ -279,8 +282,8 @@ const APP = {
   window.addEventListener('load', (e) => {
  
    
-    APP.init();
-   
+    //APP.init();
+    
     //
     startbtn.addEventListener('click', async()=>{
       startbtn.remove()

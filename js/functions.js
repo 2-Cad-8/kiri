@@ -35,7 +35,7 @@ export const profiles = [
     /*1*/{
         nombre_perfil:'Realista',
         clave: 'R',
-        carreras: 'Ingeniería, Arquitectura, Gastronomía, Policía, Deportes, Agronomía, Agricultura, Aviación Mecánica, Técnicos en reparación, Topografía, Carpintería, Conductores, Corte y confección, Veterinaria',
+        carreras: ['Ingeniería', 'Arquitectura', 'Gastronomía', 'Policía', 'Deportes', 'Agronomía', 'Agricultura', 'Aviación', 'Mecánica', 'Técnicos en reparación', 'Topografía', 'Carpintería', 'Conductores',' Corte y confección', 'Veterinaria'],
         descripcion: 'Este perfil se refiere a personas que se destacan por sus capacidades mecánicas y deportivas. Prefieren trabajar con maquinaria, equipamiento, plantas y animales. Es posible que también les guste trabajar fuera de una oficina',
         evitan:'La pasividad y dejar que otros resuelvan asuntos que pueden desarrollar por si mismos',
         intereses: 'Involucra la necesidad implicación física en su trabajo, lejos de la pasividad de la oficina, y/o la necesidad de ejercer una actividad al aire libre o permitiendo conservar un lazo estrecho con la naturaleza',
@@ -44,7 +44,7 @@ export const profiles = [
     /*2*/{
         nombre_perfil:'Artístico',
         clave: 'A',
-        carreras: 'Literatura, Comunicación, Diseño gráfico, Mercadotecnia, Medio artístico, Floristas, Fotografía, Arquitectura (diseño de interiores), Artes plásticas, Intérprete, Medios audiovisuales, Periodismo, Área infantil (trabajo con niños), Danza',
+        carreras: ['Literatura',' Comunicación', 'Diseño gráfico', 'Mercadotecnia', 'Medio artístico', 'Floristas', 'Fotografía', 'Arquitectura (diseño de interiores)',' Artes plásticas', 'Intérprete', 'Medios audiovisuales', 'Periodismo', 'Área infantil (trabajo con niños)', 'Danza'],
         descripcion: 'Este perfil incluye a las personas que aprecian las cualidades estéticas que expresan a través de su trabajo artístico y literario. Se caracterizan por su  flexibilidad y no conformidad o compromiso con un sistema específico',
         evitan:'La rutina, el conformismo, el no debatir ideas, los prejuicios, las actividades de cálculo, la técnica y las ciencias, las actividades físicas.',
         intereses: 'Los símbolos, el futuro, la originalidad, los conceptos y su concreción, la estética, las emociones y su representación.',
@@ -53,16 +53,16 @@ export const profiles = [
     /*3*/{
         nombre_perfil:'Investigador /Intelectual',
         clave: 'I',
-        carreras: 'Química, Docencia, Informática, Farmacéutica, Medicina, Matemática, Odontología, Psicología, Nutrición, Ingeniería (enfocada a investigaciones y logística), Historia, Criminalística, Programación, Veterinaria, Inteligencia analítica',
-        descripcion: 'Este perfil representa a los que prefieren profesiones científicas e intelectuales. Disfrutan de reunir información, identificar teorías o hechos y  analizar e interpretar información.',
-        evitan:'La falta de profesionalismo, la imprecisión, la incompetencia, la cotidianidad, la subjetividad',
+        carreras: ['Química', 'Docencia', 'Informática', 'Farmacéutica', 'Medicina', 'Matemática', 'Odontología', 'Psicología', 'Nutrición', 'Ingeniería (enfocada a investigaciones y logística)', 'Historia', 'Criminalística', 'Programación', 'Veterinaria', 'Inteligencia analítica'],
+        descripcion: 'Este perfil representa a personas que prefieren profesiones científicas e intelectuales. Disfrutan de reunir información, identificar teorías o hechos y  analizar e interpretar información.',
+        evitan:'La falta de profesionalismo, la imprecisión, la incompetencia, la cotidianidad y la subjetividad',
         intereses: 'La tecnicidad, la precisión, la profesionalidad, el rigor, y el sentido del detalle, la enseñanza, las ciencias, los métodos novedosos',
         motivaciones:'Desarrollar y valorar competencias, aconsejar a individuos o a empresas sobre estas áreas, investigar, transmitir conocimiento',
     },
     /*4*/{
         nombre_perfil:'Social',
         clave: 'S',
-        carreras: 'Docencia, Enfermería, Comunicación Social, Turismo, Sociología, Recursos humanos (Administración), Asistencia legal (Derecho),  Trabajo social, Terapeutas, Servicio al cliente, Coaching deportivo, Consejeros/Orientadores, Área comunitaria, Conferenciantes y motivadores, Relaciones públicas, Terapia del lenguaje',
+        carreras: ['Docencia, Enfermería', 'Comunicación Social',' Turismo', 'Sociología', 'Recursos humanos (Administración)', 'Asistencia legal (Derecho)',  'Trabajo social', 'Terapeutas', 'Servicio al cliente', 'Coaching deportivo', 'Consejeros/Orientadores', 'Área comunitaria', 'Conferenciantes y motivadores', 'Relaciones públicas', 'Terapia del lenguaje'],
         descripcion: 'Este perfil representa a las personas sociales que disfrutan al ayudar a otros. Prefieren trabajar en grupos y se caracterizan también por sus grandes habilidades de comunicación.',
         evitan:'La ausencia de contactos con el entorno exterior, el trabajo solitario. El mercantilismo, el individualismo, el hecho de no hacer nada por mejorar la vida de otros',
         intereses: 'Las buenas relaciones, los viajes y las otras culturas, las negociaciones, el ambiente de trabajo. La empatía, las relaciones humanas, el bienestar personal, la psicología, la medicina, el humanismo, la justicia',
@@ -71,7 +71,7 @@ export const profiles = [
     /*5*/{
         nombre_perfil:'Emprendedor',
         clave: 'E',
-        carreras: 'Derecho, Comercio exterior y aduanas, Administración de empresas, Turismo, Ciencias políticas, Negocios internacionales, Mercadotecnia o Marketing Chefs (Gastronomía ) Medicina, Odontología, Coaching ejecutivo / Consultoría, Jefes de policía o bomberos, Bienes raíces, Todo lo que tenga que ver con ventas, Medios sociales (influencers, bloggers, etc.), Asesoría financiera',
+        carreras: ['Derecho',' Comercio exterior y aduanas',' Administración de empresas', 'Turismo', 'Ciencias políticas',' Negocios internacionales', 'Mercadotecnia o Marketing', 'Chefs (Gastronomía)', 'Medicina', 'Odontología', 'Coaching ejecutivo / Consultoría', 'Jefes de policía o bomberos', 'Bienes raíces', 'Todo lo relacionado con ventas', 'Redes sociales (influencers, bloggers, etc.)', 'Asesoría financiera'],
         descripcion: 'Este perfil incluye a las personas con personalidad administrativa. Pueden conectar eficientemente sus ideas y opiniones con los demás y persuadirlos. Además, confían mucho en sí mismos y tienen la energía necesaria para lograr sus aspiraciones.',
         evitan:'La ausencia de responsabilidades, la imposibilidad de tomar decisiones, supervisores demasiado controladores. La inmovilidad y la inacción, trabajar encerrado en un despacho, falta de iniciativa',
         intereses: 'La administración, las orientaciones estratégicas, la dirección de proyectos. La acción a corto plazo, la aventura, la toma de riesgos, los negocios y le beneficio, las nuevas modas',
@@ -80,7 +80,7 @@ export const profiles = [
       /*6*/{
         nombre_perfil:'Convencional',
         clave: 'C',
-        carreras: 'Administración de empresas, Contabilidad, Economía, Finanzas, Función pública, Mercadotecnia, Logística internacional, Control de tráfico, Informática, Organización y Coordinación de eventos, Gestión de proyectos, Planeación estratégica, Matemáticas, Auditorías',
+        carreras: ['Administración de empresas', 'Contabilidad', 'Economía', 'Finanzas',' Función pública', 'Mercadotecnia', 'Logística internacional', 'Control de tráfico', 'Informática', 'Organización y Coordinación de eventos', 'Gestión de proyectos', 'Planeación estratégica', 'Matemáticas', 'Auditorías'],
         descripcion: 'Son aquellas personas con un alto grado de control y que prefieren trabajar con  números y cifras. Son precisos en su trabajo y siempre cumplen las normas, leyes y reglamentos laborales.',
         evitan:'El cambio repentino, la improvisación frente a situaciones importantes, la falta de métodos o medios.',
         intereses: 'La informática, las reglas y las convenciones,  los métodos, la anticipación de acontecimientos, el cuidado del detalle, la eficacia',
@@ -90,32 +90,32 @@ export const profiles = [
 export const doubts = [
     /*1*/{
         'duda': '¿Qué eres?',
-        'respuesta': 'Soy Kiri una aplicación móvil de test vocacional que te permitirá saber un poco más sobre ti y te dara un complemento de orientación vocacional a través de un test',
+        'respuesta': 'Soy Kiri una aplicación móvil de test vocacional, y te dare un complemento de orientación vocacional a través de un test',
         'estado': false
     },
     /*2*/{
         'duda': '¿Qué es un test?',
-        'respuesta': 'Es una prueba o examen destinada a evaluar conocimientos, aptitudes o funciones. En este caso evaluare tus gustos e intereses',
+        'respuesta': 'Es una prueba o examen destinada a evaluar conocimientos, aptitudes o funciones.\n En este caso evaluare tus gustos e intereses',
         'estado': false
     },
     /*3*/{
         'duda': 'instrucciones_test',
-        'respuesta': 'Te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 que tanto te identificas con cada una, siendo 1 para nada y 6 totalmente. ¿Comenzamos?',
+        'respuesta': 'Ahora te estaré haciendo una serie de preguntas y responderás con números del 1 al 6 que tanto te identificas con cada una.\n\n Siendo 1 para nada y 6 totalmente. ¿Comenzamos?',
         'estado': false
     },
     /*4*/{
         'duda': '¿Dónde puedo ver los resultados?',
-        'respuesta': ' Te los hare saber aquí mismo, pero también puedes verlos en tu perfil haciendo clic en tu avatar en la barra superior',
+        'respuesta': 'Te los hare saber aquí mismo, también puedes verlos en tu perfil haciendo clic en tu avatar en la barra superior',
         'estado': false
     },
     /*5*/{
         'duda': '¿Puedo volver a hacer el test?',
-        'respuesta': 'Si, sin embargo los datos de tu test anterior se verán eliminados',
+        'respuesta': 'Si, sin embargo los datos de tu test anterior serán eliminados',
         'estado': false
     },
     /*6*/{
         'duda': 'advertencia',
-        'respuesta': 'Antes de continuar déjame aclarar que no soy algo que pueda reemplazar completamente la ayuda de un profesional en el área así que luego de realizar este test te invito a buscar la ayuda de uno si esta dentro de tus posibilidades. Ahora sí, ¡Comencemos!',
+        'respuesta': 'Antes de continuar déjame aclarar que no soy algo que pueda reemplazar completamente la ayuda de un profesional en el área.\n\n Luego de realizar este test te invito a buscar la ayuda de uno si esta dentro de tus posibilidades. \n\nAhora sí, ¡Comencemos!',
         'estado': false
     }
 ];
@@ -335,18 +335,6 @@ export function calc_results (keys){
         }
     }, 2000);
    
-    //now we need to identify the three highest results
-    
-    
-    /*var interval = setInterval(() => {
-        if (user.resultados[0].clave != ''){
-
-        }
-    }, 2000);
-    console.log(user.resultados);*/
-    
-    //update results within user db
-        //make objects for each profile
     
 }
 
@@ -362,7 +350,7 @@ export function calc_results (keys){
     ];
     var message =message_format_builder('kiri');
     var texto = document.createTextNode(
-        secciones_test[seccion] + ': ' + pregunta 
+        n_pregunta+'/18.-' +secciones_test[seccion] + ': ' + pregunta 
     );
 
     var temp = message.firstChild;
@@ -370,7 +358,7 @@ export function calc_results (keys){
     //load
     var load = loading('kiri');
     main.appendChild(load);
-    setTimeout(() => {
+    setTimeout(async() => {
         load.remove();
         main.appendChild(message);
         
@@ -380,9 +368,9 @@ export function calc_results (keys){
         optionsContainer.setAttribute('class','optionsContainer');
         optionsContainer.setAttribute('id','optionsContainer'+n_pregunta);
         
-        main.appendChild(optionsContainer);
-        window.scrollBy(0,window.scrollHeight);
-         //= main.scrollHeight + 140;
+        await main.appendChild(optionsContainer);
+        window.scrollBy(0,window.innerHeight);
+      
         opciones(optionsContainer.id,n_pregunta);
         
     }, 2000);
@@ -435,13 +423,13 @@ export function calc_results (keys){
      
 }
 
- function opciones (id_container,n_pregunta){
+ async function opciones (id_container,n_pregunta){
     /* Create from scratch the buttons 
     and add them directly to the container */
     
     var container_opt = document.getElementById(id_container);
     //Creating buttons
-    for(var o = 1; o<7; o++){
+     for(var o = 1; o<7; o++){
         var new_button = document.createElement('button');
         var texto = document.createTextNode(o);
         //CREATION OF TEXT
@@ -451,7 +439,7 @@ export function calc_results (keys){
         container_opt.appendChild(new_button);
         
     }
-    
+    window.scrollBy(0,window.innerHeight);
     const buttonGroupPressed = e => { 
         const isButton = e.target.nodeName === 'BUTTON';
         if(!isButton) {
@@ -487,12 +475,12 @@ export function delete_options(id_container, selOption){
     temp.appendChild(texto);
     var load =loading(user_avatar);
     main.appendChild(load);
-    setTimeout(() => {
+    setTimeout(async () => {
        
         load.remove();
-        main.appendChild(message);
-        window.scrollBy(0,window.scrollHeight);
-        //main.scrollTop = main.scrollHeight;
+        await main.appendChild(message);
+        window.scrollBy(0,window.innerHeight);
+       
     }, 2000);
     
 }
@@ -503,12 +491,13 @@ export function normal_message(texto,fromwho){
       message.firstChild.appendChild(text);
       var load  = loading(fromwho);
       main.appendChild(load);
-      setTimeout(() => {
+      setTimeout(async() => {
         load.remove();
-        main.appendChild(message);
+        await main.appendChild(message);
+        window.scrollBy(0,window.innerHeight);
       }, 2000);
-      window.scrollBy(0,window.scrollHeight);
-      //main.scrollTop = main.scrollHeight;
+      
+    
 }
 //there is only 2 types of answers besides the options at the beginning of the app
 //1- asking for a doubt in specific
@@ -541,7 +530,7 @@ export function user_asnwer_options(n_options,textos,type){
         container.appendChild(new_button);
         
     }
-    
+    window.scrollBy(0,window.innerHeight);
     const buttonGroupPressed = e => { 
         const isButton = e.target.nodeName === 'BUTTON';
         if(!isButton) {
@@ -655,12 +644,10 @@ export function  user_info (){
             })
         },2000)
        
-     var interval = setInterval(() => {
+     var interval = setInterval(async () => {
         if(user.sexo){
-            normal_message('Ya veo ¿Y cuál es tu nombre?', 'kiri');
-            window.scrollBy(0,window.scrollHeight);
-            //main.scrollTop = main.scrollHeight;
             clearInterval(interval);
+            await normal_message('Ya veo ¿Y cuál es tu nombre?', 'kiri');
             typingBox.focus();
 
         }
@@ -672,14 +659,10 @@ export function  user_info (){
         user.name = typingBox.value;
         typingBox.value = '';
         normal_message(user.name,user_avatar);
-        //main.scrollTop = main.scrollHeight;
-        window.scrollBy(0,window.scrollHeight);
         interval = setInterval(() =>{
             if(user.name){
                 normal_message('Un gusto, '+ user.name, 'kiri');
                 clearInterval(interval);
-                window.scrollBy(0,window.scrollHeight);
-                //main.scrollTop = main.scrollHeight;
                 typingBox.blur();
                 typingBox.disabled = true;
                 set('user_info', user, userDB)

@@ -1,0 +1,48 @@
+.small-card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5%;
+  flex-direction: column;
+}
+.small-card-content .clave {
+  font-size: 50px;
+  padding: 10%;
+}
+.small-card-title {
+  text-align: center;
+  font-size: 18px;
+  color: #121F33;
+  font-weight: 700;
+}
+.text-sm-card {
+  color: #121F33;
+  padding: 0.625rem;
+  text-align: justify;
+  line-height: 24px;
+}
+.text-sm-card .read-m {
+  margin-left: 30%;
+  color: #121F33;
+  text-decoration: none;
+  text-align: right;
+  font-size: 13px;
+  border-radius: 0.625rem;
+  background-color: #77e2ee;
+  border-color: rgba(76, 179, 191, 0.5);
+  border-width: 0.125rem;
+  padding: 0.1875rem;
+}
+.text-sm-card .read-more {
+  margin-left: 10%;
+  margin-top: 5%;
+  border-radius: 0.3125rem;
+  background-color: rgba(76, 179, 191, 0.8);
+  color: #F2F4F5;
+  font-size: 14px;
+  width: fit-content;
+  min-height: 1.875rem;
+  border: 10;
+}

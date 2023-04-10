@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./fontawesome/css/all.css">
 </head>
 <body>
+
     <section class = "top-bar">
         <div class="container">
           <a href="index.html"><i class="fa-solid fa-arrow-left fa-2xl" style="color: #77e2ee;"></i></a>
@@ -33,12 +34,46 @@
       </div><!--END CONTAINER HORIZONTAL-->
 
       <div class="container-vertical">
+        
         <h4 class="sub-title" id = 'username'>UserName</h4>
       </div> <!--END CONTAINER VERTICAL-->
     </div>
       
     
     <div class="container-vertical" id="user-results">
+      <div id="overlay">
+      <div class="lg-card">
+        <div class="lg-card-content">
+          <div class="clave_circle"><p class="clave">A</p></div>
+          <div class="lg-card-title">Artistico</div>
+          <div class="lg-card-texts"> 
+            <p id='definicion'>
+            "Este perfil incluye a las personas que aprecian las cualidades estéticas que expresan a través de su trabajo artístico y literario. Se caracterizan por su  flexibilidad y no conformidad o compromiso con un sistema específico"
+    
+            </p>
+       <h3 class="lg-sub-title"> Carreras </h3>     
+            <p>
+    "Literatura", Comunicación,: "Diseño gráfico","Mercadotecnia","Medio artístico","Floristas","Fotografía", "Arquitectura (diseño de interiores)",Artes plásticas",Intérprete",Medios audiovisuales",Periodismo,Área infantil (trabajo con niños),Danza". 
+            </p>
+        <h3 class="lg-sub-title"> Intereses </h3>     
+            <p>
+              "Los símbolos, el futuro, la originalidad, los conceptos y su concreción, la estética, las emociones y su representación."
+    
+          </p>
+            <h3 class="lg-sub-title"> Motivaciones </h3>     
+              <p>
+                "Crear, redactar, razonar por analogía, dibujar, imaginar, percibir, innovar, debatir, cuestionar el conformismo"
+    
+            </p>
+            <h3 class="lg-sub-title"> Evitan </h3>     
+              <p>
+              "La rutina, el conformismo, el no debatir ideas, los prejuicios, las actividades de cálculo, la técnica y las ciencias, las actividades físicas."
+              </p>
+            
+          </div>
+         </div>
+      </div>
+    </div>
         <h4 class="sub-title">Resultados</h4>
         
             <div class="slider">
@@ -53,7 +88,7 @@
                       <div class="container-vertical">
                         <div class="small-card-content">
                           <h4 class="small-card-title">Clave</h4>
-                          <p class=" clave">AIR</p>
+                          <p class=" clave" id = 'clave_card'>AIR</p>
                         </div>
                       </div>
                     </div>
@@ -61,8 +96,8 @@
                     <div class="card"> 
                       <div class="container-vertical">
                         <div class="small-card-content">
-                          <h4 class="small-card-title">Artistico</h4>
-                          <p class="text-sm-card">In egestas nec justo at tempus. Mauris pharetra est non ... <a href="" class="read-m" >Ver mas</a>  </p>
+                          <h4 class="small-card-title" id = "title_p1">Artistico</h4>
+                          <p class="text-sm-card" id ="desc_p1" >In egestas nec justo at tempus. Mauris pharetra est non ... <a class="read-m" id = "SM-1" onclick ='(e)=>{e.preventDefault()}'>Ver mas</a>  </p>
                         </div>
                       </div>
                     </div>
@@ -70,8 +105,8 @@
                     <div class="card"> 
                       <div class="container-vertical">
                         <div class="small-card-content">
-                          <h4 class="small-card-title">Investigador</h4>
-                          <p class="text-sm-card">In egestas nec justo at tempus. Mauris pharetra est non ... <a href="" class="read-m" >Ver mas</a>  </p>
+                          <h4 class="small-card-title" id = "title_p2">Investigador</h4>
+                          <p class="text-sm-card" id ="desc_p2">In egestas nec justo at tempus. Mauris pharetra est non ... <a href="" class="read-m" id = "SM-2">Ver mas</a>  </p>
                           
                         </div>
                       </div>
@@ -80,8 +115,8 @@
                     <div class="card"> 
                       <div class="container-vertical">
                         <div class="small-card-content">
-                          <h4 class="small-card-title">Realista</h4>
-                          <p class="text-sm-card">In egestas nec justo at tempus. Mauris pharetra est non ... <a href="" class="read-m" >Ver mas</a>  </p>
+                          <h4 class="small-card-title" id ='title_p3'>Realista</h4>
+                          <p class="text-sm-card" id ="desc_p3">In egestas nec justo at tempus. Mauris pharetra est non ... <a href="" class="read-m" id = "SM-3">Ver mas</a>  </p>
                         </div>
                       </div>
                     </div>
@@ -91,7 +126,10 @@
         
     </div>
     </section>
-    
+
+    <script type = 'module' src = './js/index_profile.js'></script>
     <script src = './js/slider.js'></script>
+    <script type = 'module'src = './js/functions.js'></script>
+
   </body>
 </html>

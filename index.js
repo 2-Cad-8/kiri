@@ -1,3 +1,4 @@
+
 import { search_question, 
   preguntas, 
   db, 
@@ -13,7 +14,7 @@ import { search_question,
   keys,
   profileDB,
   profiles,
-  retake_test_flag
+  retake_test_flag,
  } from "./js/functions.js";
 import { set, get,  } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 
@@ -321,5 +322,6 @@ const APP = {
       }, 2000)
     })
     
+   
 
 });

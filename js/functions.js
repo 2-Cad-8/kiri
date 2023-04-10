@@ -719,7 +719,77 @@ export function loading (fromWho){
     
 }
 
-const siteWrapper = document.getElementsByTagName("html")[0];
+/***************************************************************Profile functions */
+//constants
+const username = document.getElementById('username');
+const icon = document.getElementById('iconoP');
+//slider constants
+const card_title_1 = document.getElementById('title_p1');
+const card_title_2 = document.getElementById('title_p2');
+const card_title_3 = document.getElementById('title_p3');
+
+const card_desc_1 = document.getElementById('desc_p1');
+const card_desc_2 = document.getElementById('desc_p2');
+const card_desc_3 = document.getElementById('desc_p3');
+
+export const see_more_c1 = document.getElementById('SM-1');
+export const see_more_c2 = document.getElementById('SM-2');
+export const see_more_c3 = document.getElementById('SM-3');
+
+const keyCard = document.getElementById('clave_card');
+const overlay = document.getElementById('overlay');
+//functions
+export function update_user_profile(){
+    /* Update the username, icon and if there's results */
+    //1 Check if there's username
+    get('user_info',userDB).then((data) =>{
+        console.log(data.name)
+        if(data.name){
+            console.log('entered');
+            //2 update username
+            username.innerHTML= data.name;
+             //3 updare icon
+            if(data.sexo == 'femUser'){
+                icon.className = 'eicon-fem-user';
+            }else{
+                icon.className = 'eicon-male-user';
+            }
+            //4 check if there's results update results
+            
+            if(data.resultados[0].nombre_perfil != ''){
+                let clave ='';
+                for(let perfil of data.resultados){
+                    clave = clave + perfil.clave;
+                }
+                keyCard.innerHTML = clave.toUpperCase();
+
+                card_title_1.innerHTML = data.resultados[0].nombre_perfil.substring(0,12);
+                card_title_2.innerHTML = data.resultados[1].nombre_perfil.substring(0,12);
+                card_title_3.innerHTML = data.resultados[2].nombre_perfil.substring(0,12);
+
+                card_desc_1.innerHTML = data.resultados[0].descripcion.substring(0,55) +'... <a href="" class="read-m" id = "SM-1">Ver mas</a> ';
+                card_desc_2.innerHTML = data.resultados[1].descripcion.substring(0,55) +'... <a href="" class="read-m" id = "SM-2" >Ver mas</a> ';
+                card_desc_3.innerHTML = data.resultados[2].descripcion.substring(0,55) +'... <a href="" class="read-m"id = "SM-3" >Ver mas</a> ';
+
+            }
+
+        } //5 else continue to keep not data yet
+    })
+    
+   
+
+    
+    
+
+}
+
+export function show_card () {
+    overlay.style.opacity =1;
+
+}
+
+/******************************************************************************System theme */
+/*const siteWrapper = document.getElementsByTagName("html")[0];
 const themeSelect = document.querySelector(".theme");
 
 const setSystemTheme = () => {
@@ -748,4 +818,4 @@ window
 		if (themeSelect.value === "system") {
 			setSystemTheme();
 		}
-	});
+	});*/

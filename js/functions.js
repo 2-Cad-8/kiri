@@ -732,9 +732,9 @@ const card_desc_1 = document.getElementById('desc_p1');
 const card_desc_2 = document.getElementById('desc_p2');
 const card_desc_3 = document.getElementById('desc_p3');
 
-export const see_more_c1 = document.getElementById('SM-1');
-export const see_more_c2 = document.getElementById('SM-2');
-export const see_more_c3 = document.getElementById('SM-3');
+ const see_more_c1 = document.getElementById('SM-1');
+ const see_more_c2 = document.getElementById('SM-2');
+ const see_more_c3 = document.getElementById('SM-3');
 
 const keyCard = document.getElementById('clave_card');
 const overlay = document.getElementById('overlay');
@@ -767,9 +767,9 @@ export function update_user_profile(){
                 card_title_2.innerHTML = data.resultados[1].nombre_perfil.substring(0,12);
                 card_title_3.innerHTML = data.resultados[2].nombre_perfil.substring(0,12);
 
-                card_desc_1.innerHTML = data.resultados[0].descripcion.substring(0,55) +'... <a href="" class="read-m" id = "SM-1">Ver mas</a> ';
-                card_desc_2.innerHTML = data.resultados[1].descripcion.substring(0,55) +'... <a href="" class="read-m" id = "SM-2" >Ver mas</a> ';
-                card_desc_3.innerHTML = data.resultados[2].descripcion.substring(0,55) +'... <a href="" class="read-m"id = "SM-3" >Ver mas</a> ';
+                card_desc_1.innerHTML = data.resultados[0].descripcion.substring(0,55) +'... <button class="read-more" id="SM-1">Ver mas</button> ';
+                card_desc_2.innerHTML = data.resultados[1].descripcion.substring(0,55) +'... <button class="read-more" id="SM-2">Ver mas</button> ';
+                card_desc_3.innerHTML = data.resultados[2].descripcion.substring(0,55) +'... <button class="read-more" id="SM-3">Ver mas</button> ';
 
             }
 
@@ -784,7 +784,37 @@ export function update_user_profile(){
 }
 
 export function show_card () {
-    overlay.style.opacity =1;
+    
+    var seeMoreBtns = document.getElementsByClassName('read-more');
+        console.log(seeMoreBtns);
+        console.log(overlay);
+        seeMoreBtns[0].addEventListener('click', (e)=>{
+           alert("I'm here")
+            overlay.style.opacity =1;
+        });
+        seeMoreBtns[1].addEventListener('click', (e)=>{
+            e.preventDefault();
+            overlay.style.opacity =1;
+        });
+        seeMoreBtns[2].addEventListener('click', (e)=>{
+            e.preventDefault();
+            overlay.style.opacity =1;
+        });
+    /*
+    var card_content = document.getElementsByClassName('text-sm-card');
+    console.log(card_content);
+    card_content[0].addEventListener('click', (e) =>{
+        e.preventDefault();
+        seemorePressed();
+    });
+    card_content[1].addEventListener('click', (e) =>{
+        e.preventDefault();
+        seemorePressed();
+    });
+    card_content[2].addEventListener('click', (e) =>{
+        e.preventDefault();
+        seemorePressed();
+    });*/
 
 }
 

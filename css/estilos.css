@@ -148,6 +148,11 @@ body .main .container-horizontal {
   justify-content: center;
   width: 100%;
 }
+body .main .container-horizontal.lgCard {
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.3125rem 5% 5% 5%;
+}
 body .main .container-vertical {
   display: flex;
   align-items: center;

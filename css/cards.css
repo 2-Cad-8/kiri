@@ -1,8 +1,8 @@
 .lg-card {
   display: none;
   background: #ecf2fc;
-  width: 20.875rem;
-  height: 25rem;
+  width: 18.125rem;
+  height: 30rem;
   border-radius: 0.9375rem;
   padding: 0.625rem;
   overflow: hidden;
@@ -12,19 +12,37 @@
   scrollbar-width: none;
   z-index: 99;
 }
-.lg-card .lg-card-title {
-  font-size: 20px;
-  padding: 5%;
-  padding-top: 10%;
-  margin-left: 40%;
-  margin-top: 5%;
+.lg-card .clave-circle {
+  width: 4.375rem;
+  height: 4.375rem;
+  background-color: #0074A1;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  padding: 0.625rem;
+  margin-right: 0.75rem;
 }
-.lg-card .lg-card-subtitle {
-  font-weight: 400;
+.lg-card .lg-card-title {
+  font-size: 1.6875rem;
+  color: #0074A1;
+  margin-right: 0.8125rem;
+  font-weight: bold;
+}
+.lg-card #close {
+  margin-bottom: 4.0625rem;
+  padding-left: 1.5625rem;
+  padding-right: 0.6125rem;
+}
+.lg-card .lg-sub-title {
+  font-weight: 800;
+  color: #121F33;
 }
 .lg-card .lg-card-texts {
   margin: 5%;
   padding: 0.125rem 0.8125rem;
+  text-align: left;
 }
 .lg-card::-webkit-scrollbar {
   display: none;
@@ -45,9 +63,10 @@
   /* Black background with opacity */
   z-index: -1;
   /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer;
-  /* Add a pointer on hover */
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .small-card-content {
   width: 100%;
@@ -109,4 +128,5 @@
   padding: 0.1875rem;
   min-height: 1.5625rem;
   cursor: pointer;
+  z-index: 12;
 }

@@ -713,6 +713,18 @@ const card_desc_3 = document.getElementById('desc_p3');
 
 const keyCard = document.getElementById('clave_card');
 const overlay = document.getElementById('overlay');
+
+//LG-CARD PARTS
+const circleKey = document.getElementById('circle-key');
+const title_profile = document.querySelector('.lg-card-title');
+const definicion = document.getElementById('definicion');
+const carreras = document.getElementById('carreras');
+const intereses = document.getElementById('intereses');
+const motivaciones = document.getElementById('motivaciones');
+const evitan = document.getElementById('evitan');
+
+
+
 //functions
 export function update_user_profile(){
     /* Update the username, icon and if there's results */
@@ -752,29 +764,49 @@ export function update_user_profile(){
                 var close_card = document.getElementById('close')
 
 
-                button.addEventListener('click', async (e)=>{
-                    await get_info_lgCard(1);
-                    show_card();
+                button.addEventListener('click', async (e)=>{ 
+                    get_info_lgCard(1);
+                    setTimeout(() => {
+                        show_card();
+                    }, 450);
                     close_card.addEventListener('click',(e) =>{
                       e.preventDefault();
                       hide_card();
                     });
+                    overlay.addEventListener('click',(e) =>{
+                        e.preventDefault();
+                        hide_card();
+                      });
                  });
                  button2.addEventListener('click', async (e)=>{
-                    await get_info_lgCard(2);
-                   show_card();
-                   close_card.addEventListener('click',(e) =>{
+                   
+                    get_info_lgCard(2);
+                    setTimeout(() => {
+                        show_card();
+                    }, 450);
+                    close_card.addEventListener('click',(e) =>{
                       e.preventDefault();
                       hide_card();
                     });
+                    overlay.addEventListener('click',(e) =>{
+                        e.preventDefault();
+                        hide_card();
+                      });
                 });
                 button3.addEventListener('click', async (e)=>{
-                    await get_info_lgCard(3);
-                   show_card();
-                   close_card.addEventListener('click',(e) =>{
+                    
+                    get_info_lgCard(3);
+                    setTimeout(() => {
+                        show_card();
+                    }, 450);
+                    close_card.addEventListener('click',(e) =>{
                       e.preventDefault();
                       hide_card();
                     });
+                    overlay.addEventListener('click',(e) =>{
+                        e.preventDefault();
+                        hide_card();
+                      });
                 });
             }
 
@@ -817,12 +849,6 @@ export function update_user_profile(){
 
 function get_info_lgCard (clicked_card){
     /*Changes the data within the large card*/
-        
-        
-        
-        //make query
-        //change texts from the lg card
-        //done
     
    //I need to get the key
    var key = keyCard.innerHTML;
@@ -834,15 +860,50 @@ function get_info_lgCard (clicked_card){
         profile_key = key.substring(0,1)
         console.log(profile_key);
         //make query
-        
+        get(profile_key,profileDB).then((perfil_info)=>{
+            //change texts from the lg card
+            circleKey.innerHTML = profile_key;
+            title_profile.innerHTML = perfil_info.nombre_perfil;
+            definicion.innerHTML = perfil_info.descripcion;
+            let career = perfil_info.carreras.join(', ');
+            carreras.innerHTML = career;
+            intereses.innerHTML = perfil_info.intereses;
+            motivaciones.innerHTML = perfil_info.motivaciones;
+            evitan.innerHTML = perfil_info.evitan;
+
+        }).catch(console.error);
         break;
     case 2:
         profile_key = key.substring(1,2)
         console.log(profile_key);
+        get(profile_key,profileDB).then((perfil_info)=>{
+            //change texts from the lg card
+            circleKey.innerHTML = profile_key;
+            title_profile.innerHTML = perfil_info.nombre_perfil;
+            definicion.innerHTML = perfil_info.descripcion;
+            let career = perfil_info.carreras.join(', ');
+            carreras.innerHTML = career;
+            intereses.innerHTML = perfil_info.intereses;
+            motivaciones.innerHTML = perfil_info.motivaciones;
+            evitan.innerHTML = perfil_info.evitan;
+
+        }).catch(console.error);
         break;
     case 3:
         profile_key = key.substring(2,3)
         console.log(profile_key);
+        get(profile_key,profileDB).then((perfil_info)=>{
+            //change texts from the lg card
+            circleKey.innerHTML = profile_key;
+            title_profile.innerHTML = perfil_info.nombre_perfil;
+            definicion.innerHTML = perfil_info.descripcion;
+            let career = perfil_info.carreras.join(', ');
+            carreras.innerHTML = career;
+            intereses.innerHTML = perfil_info.intereses;
+            motivaciones.innerHTML = perfil_info.motivaciones;
+            evitan.innerHTML = perfil_info.evitan;
+
+        }).catch(console.error);
         break;
    }
 }

@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/avatars_icons.css">
     <link rel="stylesheet" href="./fontawesome/css/all.css">
-    <link rel="stylesheet" href="./node_modules/swiper/swiper-bundle.css">
-    <style>
-        .swiper {
-            width: 600px;
-            height: 300px;
-        }
-    </style>
 </head>
 <body>
 
@@ -96,103 +89,70 @@
     </div>
         <h4 class="sub-title">Resultados</h4>
         
+            <div class="slider">
+                <div class="navigation-buttons">
+                  <div class="previous nav-btn"><i class="fa-solid fa-less-than" style="color: #77e2ee;"></i></div>
+                  <div class="next nav-btn"><i class="fa-solid fa-greater-than" style="color: #77e2ee;"></i></div>
+                </div>
+
+                <div class="slider-car" id = 'slider-card'>
+
+                    <div class="card main-card"> 
+                      <div class="container-vertical">
+                        <div class="small-card-content">
+                          <h4 class="small-card-title">Clave</h4>
+                          <p class=" clave" id = 'clave_card'>AIR</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card"> 
+                      <div class="container-vertical">
+                        <div class="small-card-content">
+                          <h4 class="small-card-title" id = "title_p1">Artistico</h4>
+                          <p class="text-sm-card" id ="desc_p1" >In egestas nec justo at tempus. Mauris pharetra est non ... 
+                            <!--<a class="read-m"  id = "SM-1">Ver mas</a>-->
+                            <button class="read-more" id = "SM-1" >Ver mas</button>
+                          </p>
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card"> 
+                      <div class="container-vertical">
+                        <div class="small-card-content">
+                          <h4 class="small-card-title" id = "title_p2">Investigador</h4>
+                          <p class="text-sm-card" id ="desc_p2">In egestas nec justo at tempus. Mauris pharetra est non ... 
+                            <!--<a href="" class="read-m" id = "SM-2">Ver mas</a> -->
+                            <button class="read-more" id = "SM-2">Ver mas</button>
+                          </p>
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card"> 
+                      <div class="container-vertical">
+                        <div class="small-card-content">
+                          <h4 class="small-card-title" id ='title_p3'>Realista</h4>
+                          <p class="text-sm-card" id ="desc_p3">In egestas nec justo at tempus. Mauris pharetra est non ... 
+                            <!--<a href="" class="read-m" id = "SM-3">Ver mas</a> -->
+                            <button class="read-more" id = "SM-3">Ver mas</button>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
             
-<div class="swiper slider">
-  <!-- Additional required wrapper -->
-  <div class="swiper-wrapper slider-car">
-    <!-- Slides -->
-    <div class="swiper-slide "> 
-        <div class="card main-card"> 
-        <div class="container-vertical">
-          <div class="small-card-content">
-            <h4 class="small-card-title">Clave</h4>
-            <p class=" clave" id = 'clave_card'>AIR</p>
-          </div>
-        </div>
-      </div></div>
-    <div class="swiper-slide">
-        <div class="card"> 
-            <div class="container-vertical">
-              <div class="small-card-content">
-                <h4 class="small-card-title" id = "title_p1">Artistico</h4>
-                <p class="text-sm-card" id ="desc_p1" >In egestas nec justo at tempus. Mauris pharetra est non ... 
-                  <!--<a class="read-m"  id = "SM-1">Ver mas</a>-->
-                  <button class="read-more" id = "SM-1" >Ver mas</button>
-                </p>
-                
-              </div>
-            </div>
-          </div>
-    </div>
-    <div class="swiper-slide">
-        <div class="card"> 
-            <div class="container-vertical">
-              <div class="small-card-content">
-                <h4 class="small-card-title" id = "title_p2">Investigador</h4>
-                <p class="text-sm-card" id ="desc_p2">In egestas nec justo at tempus. Mauris pharetra est non ... 
-                  <!--<a href="" class="read-m" id = "SM-2">Ver mas</a> -->
-                  <button class="read-more" id = "SM-2">Ver mas</button>
-                </p>
-                
-              </div>
-            </div>
-          </div>
-    </div>
-    <div class="swiper-slide">
-        <div class="card"> 
-            <div class="container-vertical">
-              <div class="small-card-content">
-                <h4 class="small-card-title" id ='title_p3'>Realista</h4>
-                <p class="text-sm-card" id ="desc_p3">In egestas nec justo at tempus. Mauris pharetra est non ... 
-                  <!--<a href="" class="read-m" id = "SM-3">Ver mas</a> -->
-                  <button class="read-more" id = "SM-3">Ver mas</button>
-                </p>
-              </div>
-            </div>
-          </div>
-    </div>
-
-  </div>
-  <!-- If we need pagination 
-  <div class="swiper-pagination"></div>-->
-
-  <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev navigation-buttons previous nav-btn""></div>
-  <div class="swiper-button-next navigation-buttons next nav-btn"></div>
-
-  <!-- If we need scrollbar 
-  <div class="swiper-scrollbar"></div>-->
-</div>
-
         
     </div>
     </section>
 
     <script type = 'module' src = './js/index_profile.js'></script>
-    <script type = 'module' src = './js/swiper.js'></script>
+    <script src = './js/slider.js'></script>
     <script type = 'module'src = './js/functions.js'></script>
-    <script>
-        const swiper = new Swiper('.swiper', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-    
-        // If we need pagination
-        /*pagination: {
-        el: '.swiper-pagination',
-        },*/
-    
-        // Navigation arrows
-        navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-        },
-    
-        // And if we need scrollbar
-        scrollbar: {
-        el: '.swiper-scrollbar',
-        },
-    });
-    </script>
+
   </body>
 </html>

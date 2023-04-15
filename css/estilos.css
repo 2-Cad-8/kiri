@@ -200,6 +200,7 @@ body .main .navigation-buttons {
   align-items: center;
   color: #F5FEFF;
   margin-top: 0.625rem;
+  --swiper-navigation-size: 1.5625rem;
 }
 body .main .navigation-buttons .previous {
   left: 0.625rem;
@@ -235,7 +236,7 @@ body .main .slider-car .card {
   border-radius: 0.625rem;
   transition: all 0.3s ease;
   position: absolute;
-  display: none;
+  display: block;
   margin: 5% 4% 5% 6%;
 }
 body .main .slider-car .main-card {

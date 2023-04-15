@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap-icons": "^1.10.3",
     "firebase": "^9.17.1",
-    "idb-keyval": "^6.2.0"
+    "idb-keyval": "^6.2.0",
+    "swiper": "^9.2.2"
   }
 }

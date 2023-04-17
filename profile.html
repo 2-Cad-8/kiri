@@ -34,13 +34,13 @@
       <div class="container-horizontal">
         <div class="user-avatar"><!--CONTAINER FOR THE ICON -->
           <div class="user-icon">
-            <span class = "ms-male-user" id = 'iconoP'></span>
+            <div class = "ms-male-user" id = 'iconoP'></div>
         </div>
         </div>
-        <button class="edit-btn">Editar</button>
+        <button class="edit-btn" id ='edit'>Editar</button>
       </div><!--END CONTAINER HORIZONTAL-->
 
-      <div class="container-vertical">
+      <div class="container-vertical" id ='user_info_container'>
         
         <h4 class="sub-title" id = 'username'>UserName</h4>
       </div> <!--END CONTAINER VERTICAL-->
@@ -157,8 +157,8 @@
   <div class="swiper-pagination"></div>-->
 
   <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev navigation-buttons previous nav-btn""></div>
-  <div class="swiper-button-next navigation-buttons next nav-btn"></div>
+  <div class="swiper-button-prev navigation-buttons  nav-btn""></div>
+  <div class="swiper-button-next navigation-buttons  nav-btn"></div>
 
   <!-- If we need scrollbar 
   <div class="swiper-scrollbar"></div>-->
@@ -169,18 +169,13 @@
     </section>
 
     <script type = 'module' src = './js/index_profile.js'></script>
-    <script type = 'module' src = './js/swiper.js'></script>
     <script type = 'module'src = './js/functions.js'></script>
-    <script>
+    <script type = 'module'>
+      import Swiper from '../node_modules/swiper/swiper-bundle.esm.browser.js';
         const swiper = new Swiper('.swiper', {
         // Optional parameters
         direction: 'horizontal',
         loop: true,
-    
-        // If we need pagination
-        /*pagination: {
-        el: '.swiper-pagination',
-        },*/
     
         // Navigation arrows
         navigation: {
@@ -189,9 +184,9 @@
         },
     
         // And if we need scrollbar
-        scrollbar: {
+        /*scrollbar: {
         el: '.swiper-scrollbar',
-        },
+        },*/
     });
     </script>
   </body>

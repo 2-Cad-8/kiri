@@ -1,8 +1,6 @@
   // core version + navigation, pagination modules:
   import Swiper from '../node_modules/swiper/swiper-bundle.esm.browser.js';
 
-  // import styles bundle
-  //import '../node_modules/swiper/swiper-bundle.css';
 
 const swiper = new Swiper('.swiper', {
     // Optional parameters
@@ -15,7 +13,7 @@ const swiper = new Swiper('.swiper', {
     },*/
   
     // Navigation arrows
-    navigation: {
+  navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },

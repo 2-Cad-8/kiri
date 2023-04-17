@@ -1,11 +1,14 @@
 import { 
+    edit_username,
     update_user_profile,
    } from "./functions.js";
    
 window.addEventListener('load', async () =>{
     await update_user_profile();
-   //setInterval(() => {
-    console.log('I selected this>'+document.getElementById('circle-key'));
-   }, 2000); 
+    const editBTN = document.getElementById('edit');
+    editBTN.addEventListener('click', ()=>{
+        edit_username();
+    })
+    
       
-  //})
+  })

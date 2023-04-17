@@ -193,10 +193,17 @@ body {
             width: 100%;
             &.lgCard{
                 align-items:center;
-                justify-content:flex-start;
+                justify-content:space-around;
                 margin: 0.3125rem 5% 5% 5%;
             }
         }
+        .user-icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+        
         .container-vertical{
             display: flex;
             align-items:center;
@@ -244,9 +251,15 @@ body {
             display: flex;
             justify-content:center;
             align-items: center;
-            color:@card-background;
+            color:fade( @dark_text,70%);
             margin-top: 0.625rem;
-            --swiper-navigation-size: 1.5625rem;
+            --swiper-navigation-size: 1.125rem;
+            background-color: fade(@light-blue,50%);
+            width: 1.5625rem;
+            height: 1.5625rem;
+            border-radius: 50%;
+            padding: 0.3125rem;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
             .previous{
                 left: 0.625rem;
                 margin-left: 0.3125rem;

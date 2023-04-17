@@ -150,8 +150,13 @@ body .main .container-horizontal {
 }
 body .main .container-horizontal.lgCard {
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
   margin: 0.3125rem 5% 5% 5%;
+}
+body .main .user-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 body .main .container-vertical {
   display: flex;
@@ -198,9 +203,15 @@ body .main .navigation-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #F5FEFF;
+  color: rgba(18, 31, 51, 0.7);
   margin-top: 0.625rem;
-  --swiper-navigation-size: 1.5625rem;
+  --swiper-navigation-size: 1.125rem;
+  background-color: rgba(119, 226, 238, 0.5);
+  width: 1.5625rem;
+  height: 1.5625rem;
+  border-radius: 50%;
+  padding: 0.3125rem;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
 }
 body .main .navigation-buttons .previous {
   left: 0.625rem;

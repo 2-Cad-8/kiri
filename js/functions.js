@@ -51,7 +51,7 @@ export const profiles = [
         motivaciones:'Crear, redactar, razonar por analogía, dibujar, imaginar, percibir, innovar, debatir, cuestionar el conformismo',
     },
     /*3*/{
-        nombre_perfil:'Investigador /Intelectual',
+        nombre_perfil:'Investigador',
         clave: 'I',
         carreras: ['Química', 'Docencia', 'Informática', 'Farmacéutica', 'Medicina', 'Matemática', 'Odontología', 'Psicología', 'Nutrición', 'Ingeniería (enfocada a investigaciones y logística)', 'Historia', 'Criminalística', 'Programación', 'Veterinaria', 'Inteligencia analítica'],
         descripcion: 'Este perfil representa a personas que prefieren profesiones científicas e intelectuales. Disfrutan de reunir información, identificar teorías o hechos y  analizar e interpretar información.',
@@ -737,9 +737,9 @@ export function update_user_profile(){
             username.innerHTML= data.name;
              //3 updare icon
             if(data.sexo == 'femUser'){
-                icon.className = 'eicon-fem-user';
+                icon.className = 'ms-female-user';
             }else{
-                icon.className = 'eicon-male-user';
+                icon.className = 'ms-male-user';
             }
             //4 check if there's results update results
             
@@ -908,34 +908,40 @@ function get_info_lgCard (clicked_card){
    }
 }
 
-/******************************************************************************System theme */
-/*const siteWrapper = document.getElementsByTagName("html")[0];
-const themeSelect = document.querySelector(".theme");
+export function edit_username (){
+    /* Change username */
+   
+    //consult the db for the current username
+    const usernam_place = document.getElementById('user_info_container');
+    const btn = document.getElementById('edit');
+    var username = usernam_place.firstElementChild;
+    btn.removeEventListener('click',edit_username);
 
-const setSystemTheme = () => {
-	if (
-		window.matchMedia &&
-		window.matchMedia("(prefers-color-scheme: dark)").matches
-	) {
-		siteWrapper.setAttribute("data-theme", "dark");
-	} else {
-		siteWrapper.setAttribute("data-theme", "light");
-	}
-};
+    get('user_info',userDB).then((data)=>{
+        // Change div for an input with the curretn username
+        var new_input = document.createElement('input');
+        new_input.value = data.name;
+        new_input.setAttribute('class','input-control');
 
-themeSelect.addEventListener("change", (event) => {
-	const selectedTheme = event.target.value;
-	if (selectedTheme === "system") {
-		setSystemTheme();
-	} else {
-		siteWrapper.setAttribute("data-theme", selectedTheme);
-	}
-});
+        usernam_place.removeChild(usernam_place.firstChild);
+        usernam_place.appendChild(new_input);
+        btn.textContent ='Guardar';
+        btn.addEventListener('click',()=>{
+            data.name = new_input.value;
+            console.log(data.name);
+            var new_name = document.createElement('h4');
+            new_name.innerHTML = new_input.value;
+            new_input.setAttribute('class','sub-title');
 
-window
-	.matchMedia("(prefers-color-scheme: dark)")
-	.addEventListener("change", (e) => {
-		if (themeSelect.value === "system") {
-			setSystemTheme();
-		}
-	});*/
+            set('user-infor',data,userDB).then(console.log('done!'))
+            .catch(console.error);
+
+            usernam_place.removeChild(usernam_place.firstChild);
+            usernam_place.appendChild(new_name);
+            btn.textContent ='Editar';
+        })
+    })
+    
+    //change test from buttom to done
+    //after changing the name update db and call again update user_info
+}

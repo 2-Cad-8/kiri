@@ -47,6 +47,19 @@ button span {
   background-color: #77e2ee;
   border-radius: 100%;
 }
+.selected {
+  border-style: solid;
+  border-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 25px 3px #77e2ee;
+}
+.results {
+  display: none;
+}
+.no-results {
+  display: block;
+  text-align: center;
+}
 input:disabled {
   background-color: #fff;
 }

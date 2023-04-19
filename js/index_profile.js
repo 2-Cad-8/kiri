@@ -6,8 +6,9 @@ import {
 window.addEventListener('load', async () =>{
     await update_user_profile();
     const editBTN = document.getElementById('edit');
-    editBTN.addEventListener('click', ()=>{
-        edit_username();
+    editBTN.addEventListener('click',  ()=>{
+        
+        edit_username(editBTN.textContent);
     })
     
       

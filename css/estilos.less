@@ -67,7 +67,21 @@ button{
     background-color: @light-blue;
     border-radius: 100%;
 }
+.selected{
+    border-style: solid;
+    //border-width: 0.3125rem;
+    border-color:@colorprincipal;
+    border-radius: 50%;
+    box-shadow: 0 0 25px 3px @light-blue;
+}
 
+.results{
+    display: none;
+}
+.no-results{
+    display: block;
+    text-align: center;
+}
 input:disabled{
     background-color: @colorprincipal;
 }

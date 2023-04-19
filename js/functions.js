@@ -744,6 +744,11 @@ export function update_user_profile(){
             //4 check if there's results update results
             
             if(data.resultados[0].nombre_perfil != ''){
+                var show_results = document.getElementById('results');
+                var no_results  =document.getElementById('no-results');
+                show_results.style.display = 'block';
+                no_results.style.display = 'none';
+
                 let clave ='';
                 for(let perfil of data.resultados){
                     clave = clave + perfil.clave;
@@ -821,21 +826,7 @@ export function update_user_profile(){
     overlay.style.zIndex =99;
     overlay.style.opacity =1;
     card.style.display = 'block';
-    /*
-    var card_content = document.getElementsByClassName('text-sm-card');
-    console.log(card_content);
-    card_content[0].addEventListener('click', (e) =>{
-        e.preventDefault();
-        seemorePressed();
-    });
-    card_content[1].addEventListener('click', (e) =>{
-        e.preventDefault();
-        seemorePressed();
-    });
-    card_content[2].addEventListener('click', (e) =>{
-        e.preventDefault();
-        seemorePressed();
-    });*/
+    card.scrollTo(0,0);
 
 }
 
@@ -908,40 +899,128 @@ function get_info_lgCard (clicked_card){
    }
 }
 
-export function edit_username (){
-    /* Change username */
+export function edit_username (actionType){
+    /* Change username and gender*/
    
     //consult the db for the current username
     const usernam_place = document.getElementById('user_info_container');
     const btn = document.getElementById('edit');
-    var username = usernam_place.firstElementChild;
-    btn.removeEventListener('click',edit_username);
 
+    var username = usernam_place.children;
+
+    const sex_buttons = (selected)=>{
+        var malebutton = document.createElement('div');
+        malebutton.setAttribute('id', 'maleUser');
+        malebutton.setAttribute('class', 'button-icon');
+        var femalebutton = document.createElement('div');
+        femalebutton.setAttribute('id', 'femUser');
+        femalebutton.setAttribute('class', 'button-icon');
+        //icons
+        var icon_male  = document.createElement('span');
+        var icon_female  = document.createElement('span');
+        icon_male.setAttribute('class', 'eicon-male-user');
+        icon_female.setAttribute('class', 'eicon-fem-user');
+        //containers
+        var icon_container_fem = document.createElement('div');
+        icon_container_fem.setAttribute('class','icon-container ');
+        icon_container_fem.appendChild(icon_female);
+
+         var icon_container_male = document.createElement('div');
+         icon_container_male.setAttribute('class','icon-container ');
+         icon_container_male.appendChild(icon_male);
+
+         if(selected == 'maleUser'){
+            malebutton.setAttribute('class', malebutton.className+' selected');
+         }else if(selected == 'femUser'){
+            femalebutton.setAttribute('class', femalebutton.className+' selected');
+         }
+         //container
+         var optionsContainer = document.createElement('div');
+         optionsContainer.setAttribute('class','optionsContainer');
+         optionsContainer.setAttribute('id','optionsContainer');
+        //adding buttons
+        malebutton.appendChild(icon_container_male);
+        femalebutton.appendChild(icon_container_fem);
+        //SETTING ATTRIBUTES
+        
+        optionsContainer.appendChild(malebutton);
+        optionsContainer.appendChild(femalebutton);
+        return optionsContainer;
+    }
+    if(actionType == 'Editar'){
     get('user_info',userDB).then((data)=>{
         // Change div for an input with the curretn username
         var new_input = document.createElement('input');
         new_input.value = data.name;
         new_input.setAttribute('class','input-control');
+        var sex_opt = sex_buttons(data.sexo);
+        console.log(sex_opt);
 
-        usernam_place.removeChild(usernam_place.firstChild);
+        usernam_place.removeChild(username[0]);
         usernam_place.appendChild(new_input);
+        usernam_place.appendChild(sex_opt);
+
+        //listening buttons
+        var children = sex_opt.children;
+        console.log(children);
+        sex_opt.addEventListener('click',(e)=>{
+            const isbutton = e.target.nodeName === 'SPAN';
+            const button = e.target;
+            if(!isbutton){
+                return;
+            }
+            console.log(button);
+            var leng = 0;
+            switch(button.className){
+                case 'eicon-fem-user'://If Female button is clicked
+                    
+                    leng = children[1].className.length;
+                    console.log(leng);
+                    if(leng == 11){
+                        children[1].className = children[1].className +' selected';
+                        children[0].className = children[0].className.replace(children[0].className,'button-icon');
+                        data.sexo = 'femUser';
+                        set('user_info', data,userDB).then(console.log('se changed'));
+                    }
+                    break;
+                case 'eicon-male-user'://If Male button is clicked
+                    leng = children[0].className.length;
+                    console.log(leng);
+                    if(leng == 11){
+                        children[0].className = children[0].className +' selected';
+                        children[1].className = children[1].className.replace(children[1].className,'button-icon');
+                        data.sexo = 'maleUser';
+                        set('user_info', data,userDB).then(console.log('se changed'));
+                    }
+                    break;
+            }
+        })
+
         btn.textContent ='Guardar';
-        btn.addEventListener('click',()=>{
-            data.name = new_input.value;
-            console.log(data.name);
+    })
+    }
+    else if(actionType== 'Guardar'){
+
+        username = usernam_place.children;
+        console.log(username);
+        get('user_info',userDB).then((data)=>{
+            data.name = username[0].value;//new username
+
             var new_name = document.createElement('h4');
-            new_name.innerHTML = new_input.value;
-            new_input.setAttribute('class','sub-title');
+            new_name.innerHTML = username[0].value;
+            new_name.setAttribute('class','sub-title');
 
-            set('user-infor',data,userDB).then(console.log('done!'))
+
+            set('user_info',data,userDB).then(console.log('done!'))
             .catch(console.error);
-
-            usernam_place.removeChild(usernam_place.firstChild);
+            console.log(username);
+            usernam_place.removeChild(username[0]);
+            console.log(username);
+            usernam_place.removeChild(username[0]);
             usernam_place.appendChild(new_name);
             btn.textContent ='Editar';
-        })
-    })
-    
-    //change test from buttom to done
-    //after changing the name update db and call again update user_info
+
+            update_user_profile();
+        });
+    }
 }

@@ -296,6 +296,14 @@ body .main .slider-car .card:hover {
   margin-bottom: 2%;
   flex-grow: 7;
 }
+.top-bar .container .title-icon-left {
+  text-align: center;
+  font-size: 2.3125rem;
+  padding-top: 2.5%;
+  margin-bottom: 2%;
+  flex-grow: 7;
+  padding-right: 8%;
+}
 .top-bar .container .perfil {
   background-color: #77e2ee;
   width: 3.125rem;
@@ -313,6 +321,9 @@ body .main .slider-car .card:hover {
   padding: 50%;
   align-self: center;
   background-repeat: no-repeat;
+}
+.top-bar .container .go-back {
+  margin-left: 5%;
 }
 .bottom-bar {
   margin-top: 10%;

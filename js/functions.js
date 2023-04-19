@@ -744,6 +744,7 @@ export function update_user_profile(){
             //4 check if there's results update results
             
             if(data.resultados[0].nombre_perfil != ''){
+                //show results
                 var show_results = document.getElementById('results');
                 var no_results  =document.getElementById('no-results');
                 show_results.style.display = 'block';

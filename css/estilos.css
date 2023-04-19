@@ -191,6 +191,7 @@ body .main .edit-btn {
   color: #121F33;
   border-radius: 0.625rem;
   margin-left: 2rem;
+  cursor: pointer;
 }
 body .main .sub-title {
   font-size: 1.5625rem;

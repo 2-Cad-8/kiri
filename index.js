@@ -283,7 +283,7 @@ const APP = {
   window.addEventListener('load', (e) => {
  
    
-    //APP.init();
+    APP.init();
     
     //
     startbtn.addEventListener('click', async()=>{

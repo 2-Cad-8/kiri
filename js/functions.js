@@ -612,6 +612,7 @@ export function  user_info (){
         malebutton.appendChild(icon_container_male);
         femalebutton.appendChild(icon_container_fem);
         //SETTING ATTRIBUTES
+        //link
         
         optionsContainer.appendChild(malebutton);
         optionsContainer.appendChild(femalebutton);
@@ -639,7 +640,7 @@ export function  user_info (){
                 var temp = document.getElementById('iconoP');
                 var parent = temp.parentNode;
                 parent.removeChild(temp);
-                parent.appendChild(new_icon)
+                parent.appendChild(new_icon);
                 //temp.appendChild(new_icon);
             })
         },2000)
@@ -670,6 +671,8 @@ export function  user_info (){
                 .catch(console.warn)
                 sendBtn.removeEventListener('click',saving_name);
                 sendBtn.disabled = true;
+                var link = document.getElementById('profile_link');
+                link.href = 'profile.html';
             }
         },1000)
     }

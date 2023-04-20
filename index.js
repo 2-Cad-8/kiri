@@ -35,7 +35,7 @@ const APP = {
     registerSW() {
       if ('serviceWorker' in navigator) {
         // Register a service worker hosted at the root of the site
-        navigator.serviceWorker.register('/SW.js').then(
+        navigator.serviceWorker.register('./SW.js').then(
           (registration) => {
             APP.SW =
               registration.installing ||
@@ -278,15 +278,12 @@ const APP = {
           }, 2000);
        
     }
-  
+
   }//end of APP
   window.addEventListener('load', (e) => {
- 
-   
-    APP.init();
-    
-    //
+    APP.registerSW();
     startbtn.addEventListener('click', async()=>{
+      APP.init();
       startbtn.remove()
       normal_message('Hola..?',user_avatar);
 

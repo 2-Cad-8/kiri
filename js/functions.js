@@ -730,9 +730,7 @@ export function update_user_profile(){
     /* Update the username, icon and if there's results */
     //1 Check if there's username
     get('user_info',userDB).then((data) =>{
-        console.log(data.name)
         if(data.name){
-            console.log('entered');
             //2 update username
             username.innerHTML= data.name;
              //3 updare icon
@@ -742,8 +740,8 @@ export function update_user_profile(){
                 icon.className = 'ms-male-user';
             }
             //4 check if there's results update results
-            
-            if(data.resultados[0].nombre_perfil != ''){
+           
+            if(Object.keys(data.resultados[0]).length != 0){
                 //show results
                 var show_results = document.getElementById('results');
                 var no_results  =document.getElementById('no-results');

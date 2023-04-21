@@ -6,8 +6,8 @@
 @kiri-msg:#3F79A6;//156770 ;
 @light-blue: #77e2ee;//#4cb3bf;
 @white: #F2F4F5;
-@title: 'Open Sans', sans-serif;
-@small_text: 'Segoe UI', Tahoma, Geneva, Arial, sans-serif;
+@title: 'Roboto', sans-serif;
+@small_text: 'Lucida Sans','Montserrat','Open Sans',sans-serif;
 @dark_text:#121F33;
 
 //Fuentes
@@ -16,7 +16,7 @@
     padding: 0;
     margin:0;
     font-size: 16px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: @small_text;
     -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -41,8 +41,9 @@ input{
     border-radius: 1.25rem ; //0.3125rem
     font-size: 1.0625rem;
     padding-left: 5%;
-    padding-right: 7%;
+    padding-right: 3%;
     font-family:@small_text;
+    
 }
 
 button{
@@ -54,6 +55,9 @@ button{
     border-radius: 90%;
     background-color: @light-blue;
     color: @white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     span{
         position:absolute
@@ -243,7 +247,7 @@ body {
         .sub-title{
             font-size: 1.5625rem;
             margin:0.625rem;
-            font-family: @small_text;
+            font-family: @title;
             font-weight: 400;
             position: center;
         }
@@ -354,6 +358,7 @@ body {
             .title{
                 text-align: center;
                 font-size: 2.3125rem;
+                font-family: @title;
                 padding:0.125rem;
                 padding-left: 4rem;
                 padding-top: 2.5%;
@@ -364,10 +369,12 @@ body {
             .title-icon-left{
                 text-align: center;
                 font-size: 2.3125rem;
+                font-family: @title;
                 padding-top: 2.5%;
                 margin-bottom: 2%;
                 flex-grow: 7;
                 padding-right: 8%;
+                
             }
             .perfil{
                 background-color: @light-blue;

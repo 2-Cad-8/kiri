@@ -34,24 +34,37 @@ const APP = {
     },
     registerSW() {
       if ('serviceWorker' in navigator) {
-        // Register a service worker hosted at the root of the site
-        navigator.serviceWorker.register('./SW.js').then(
-          (registration) => {
+        // 1. Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker
+          .register('/newSW.js', {
+            scope: '/',
+          })
+          .then((registration) => {
             APP.SW =
               registration.installing ||
               registration.waiting ||
               registration.active;
-          },
-          (error) => {
-            console.log('Service worker registration failed:', error);
-          }
-        );
-        //listen for the latest sw
-        navigator.serviceWorker.addEventListener('controllerchange', async () => {
-          APP.SW = navigator.serviceWorker.controller;
-        });
-        //listen for messages from the service worker
-        navigator.serviceWorker.addEventListener('message', APP.onMessage);
+            console.log('service worker registered');
+          });
+        // 2. See if the page is currently has a service worker.
+        if (navigator.serviceWorker.controller) {
+          console.log('we have a service worker installed');
+        }
+  
+        // 3. Register a handler to detect when a new or
+        // updated service worker is installed & activate.
+        navigator.serviceWorker.oncontrollerchange = (ev) => {
+          console.log('New service worker activated');
+        };
+  
+        // 4. remove/unregister service workers
+        // navigator.serviceWorker.getRegistrations().then((regs) => {
+        //   for (let reg of regs) {
+        //     reg.unregister().then((isUnreg) => console.log(isUnreg));
+        //   }
+        // });
+        // 5. Listen for messages from the service worker
       } else {
         console.log('Service workers are not supported.');
       }
@@ -280,8 +293,9 @@ const APP = {
     }
 
   }//end of APP
+  document.addEventListener('DOMContentLoaded', APP.registerSW);
   window.addEventListener('load', (e) => {
-    APP.registerSW();
+    
     startbtn.addEventListener('click', async()=>{
       APP.init();
       startbtn.remove()

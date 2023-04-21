@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   font-size: 16px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Montserrat', 'Open Sans', sans-serif;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -12,7 +12,7 @@
   font-size: 2.5rem;
   padding: 0.125rem;
   padding-top: 5%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 p {
   color: #121F33;
@@ -24,8 +24,8 @@ input {
   border-radius: 1.25rem;
   font-size: 1.0625rem;
   padding-left: 5%;
-  padding-right: 7%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Arial, sans-serif;
+  padding-right: 3%;
+  font-family: 'Lucida Sans', 'Montserrat', 'Open Sans', sans-serif;
 }
 button {
   border: 0;
@@ -36,6 +36,9 @@ button {
   border-radius: 90%;
   background-color: #77e2ee;
   color: #F2F4F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 button span {
   position: absolute;
@@ -196,7 +199,7 @@ body .main .edit-btn {
 body .main .sub-title {
   font-size: 1.5625rem;
   margin: 0.625rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   position: center;
 }
@@ -291,6 +294,7 @@ body .main .slider-car .card:hover {
 .top-bar .container .title {
   text-align: center;
   font-size: 2.3125rem;
+  font-family: 'Roboto', sans-serif;
   padding: 0.125rem;
   padding-left: 4rem;
   padding-top: 2.5%;
@@ -300,6 +304,7 @@ body .main .slider-car .card:hover {
 .top-bar .container .title-icon-left {
   text-align: center;
   font-size: 2.3125rem;
+  font-family: 'Roboto', sans-serif;
   padding-top: 2.5%;
   margin-bottom: 2%;
   flex-grow: 7;

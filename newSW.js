@@ -1,11 +1,37 @@
-//our service worker
-// console.log('sw running');
-//new
-
+const cache_assets ='assets';
+const dinamicCache = 'dinamic';
+import {
+  set, 
+  get,
+  createStore,
+} from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
+const cache_messages = 'messages';
+let assets = ['/', 
+'/index.html', 
+'/css/estilos.css', 
+'/css/cards.css',
+'/css/avatars_icons.css',
+'/assets/img/boy_avatar.png',
+'/assets/img/defaultProfile.png',
+'/assets/img/girl_avatar.png',
+'index.js'];
 //console.log({ self });
 self.addEventListener('install', (ev) => {
     //service worker is installed.
     console.log('installed');
+    ev.waitUntil(
+      caches.open(cache_assets).then((cache) => {
+        cache.addAll(assets).then(
+          () => {
+            //addAll == fetch() + put()
+            console.log(`${cache_assets} has been updated`);
+          },
+          (err) => {
+            console.warn(`failed to update ${cache_assets}.`);
+          }
+        );
+      })
+    );
   });
   self.addEventListener('activate', (ev) => {
     //service worker is activated
@@ -18,5 +44,10 @@ self.addEventListener('install', (ev) => {
   });
   
   self.addEventListener('message', (ev) => {
-    //message from webpage
+    let data = ev.data;
+    //console.log(ev.data);
+    let clientId =data;
+    //console.log('Service Worker indeed received '+ clientId);
+    set('messages',clientId, cache_messages).then(console.log('messages written'))
+    .catch(console.warn);
   });

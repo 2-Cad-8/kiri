@@ -15,6 +15,7 @@ import { search_question,
   profileDB,
   profiles,
   retake_test_flag,
+  main,
  } from "./js/functions.js";
 import { set, get,  } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 
@@ -27,6 +28,8 @@ const startbtn = document.getElementById('start');
 const APP = {
     SW: null,
     DB: null, //TODO:
+    file: null,
+    response: null,
     init() {
       APP.write_bd();
       //APP.registerSW();
@@ -290,42 +293,62 @@ const APP = {
             }
           }, 2000);
        
-    }
+    },
+    send_message(msg){
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage(msg);
+      }
+    },
+    onMessage({ data }) {
+      //got a message from the service worker
+      console.log('Web page receiving', data);
+    },
+    reload_chat(){
+      /* Loads the chat from the cache */
+      //check if there's cache
+      if(caches.has('chatCache')){
+        //if there is load it
 
+      }
+      
+      //else do nothing await for the user
+    }
+    
   }//end of APP
-  document.addEventListener('DOMContentLoaded', APP.registerSW);
+  
   window.addEventListener('load', (e) => {
     
     startbtn.addEventListener('click', async()=>{
       APP.init();
       startbtn.remove()
       normal_message('Hola..?',user_avatar);
-
+      
       setTimeout(()=>{
         normal_message('Hola!', 'kiri')
         
       },2000)
-      setTimeout(()=>{
+      await setTimeout(()=>{
         //options to ask for what is kiri
         user_asnwer_options(1,'¿Qué eres?','doubt');
         var interval = setInterval(() => {
           get('¿Qué eres?',doubtsDB).then((data)=>{
             if(data.estado){
               clearInterval(interval);
-              setTimeout(() => {
-                user_info();
+              setTimeout(async () => {
+                await  user_info();
               }, 2000);
               
             }
           }).catch(console.warn)
         }, 2000);
-     
+        
       },5000)
 
       var interval = setInterval(()=>{
         get('user_info',userDB).then((data)=>{
           if(data.name != ''){
             clearInterval(interval);
+            APP.send_message(main.innerHTML.toString());
             APP.dudas_preTest();
             
           }

@@ -1026,3 +1026,22 @@ export function edit_username (actionType){
         });
     }
 }
+
+export function update_msgs(flag,checkpoint) {
+    let msgs = {messages:'', completed_part: ''};
+    switch(flag){
+        case 'save_msg':
+            msgs.messages =main.innerHTML;
+            msgs.completed_part = checkpoint;
+            set('msgs', msgs , userDB).then('messages correctly saved')
+            .catch(console.warn);
+            break;
+        case 'update_chat':
+            get('msgs',userDB).then((mensajes)=>{
+                if(mensajes != ''){
+                    main.innerHTML = mensajes.messages;
+                };
+            })
+            break;
+    }
+}

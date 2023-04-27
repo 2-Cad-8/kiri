@@ -1,10 +1,6 @@
 const cache_assets ='assets';
 const dinamicCache = 'dinamic';
-import {
-  set, 
-  get,
-  createStore,
-} from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
+
 const cache_messages = 'messages';
 let assets = ['/', 
 '/index.html', 
@@ -43,11 +39,9 @@ self.addEventListener('install', (ev) => {
     console.log('intercepted a http request', ev.request);
   });
   
-  self.addEventListener('message', (ev) => {
+  self.addEventListener('message', async (ev) => {
     let data = ev.data;
-    //console.log(ev.data);
-    let clientId =data;
-    //console.log('Service Worker indeed received '+ clientId);
-    set('messages',clientId, cache_messages).then(console.log('messages written'))
-    .catch(console.warn);
+    console.log(ev.data);
+    //let main_content =data.new_messages;
+   
   });

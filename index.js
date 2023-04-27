@@ -16,6 +16,7 @@ import { search_question,
   profiles,
   retake_test_flag,
   main,
+  update_msgs,
  } from "./js/functions.js";
 import { set, get,  } from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 
@@ -25,14 +26,15 @@ const dudas_btns = ['¿Qué es un test?',
 '¿Puedo volver a hacer el test?'
 ]
 const startbtn = document.getElementById('start');
+const icono_profile = document.getElementById('iconoP');
 const APP = {
     SW: null,
     DB: null, //TODO:
     file: null,
     response: null,
     init() {
-      APP.write_bd();
-      //APP.registerSW();
+      
+      APP.registerSW();
       
     },
     registerSW() {
@@ -76,6 +78,9 @@ const APP = {
       set('user_info',user,userDB)
         .then(console.log('userdb created'))
         .catch(console.warn);
+      set('msgs', '', userDB)
+      .then('mensajes cache created')
+      .catch(console.warn);
       var i = 1;
       for (let pregunta of preguntas){ //wrinting questions of the test
         set(i.toString(),pregunta,db)
@@ -144,6 +149,105 @@ const APP = {
             }, 2000)
           }
       },
+    show_results(){
+      normal_message('¡Hemos terminado!','kiri');
+      setTimeout(() => {
+        var clave_temp= ['',{
+          nombre:'',
+          definicion: '',
+          carreras: ''
+        },
+        {
+          nombre:'',
+          definicion: '',
+          carreras: ''
+        },
+        {
+          nombre:'',
+          definicion: '',
+          carreras: ''
+        }];
+        //add claves
+        var interval =setInterval(() => {
+        get('user_info',userDB).then((data)=>{
+          //clave y nombres
+          clave_temp[0] = data.resultados[0].clave +data.resultados[1].clave  + data.resultados[2].clave 
+          clave_temp[1].nombre = data.resultados[0].nombre_perfil;
+          clave_temp[2].nombre = data.resultados[1].nombre_perfil;
+          clave_temp[3].nombre = data.resultados[2].nombre_perfil;
+          //descripcion
+          clave_temp[1].definicion = data.resultados[0].descripcion;
+          clave_temp[2].definicion = data.resultados[1].descripcion;
+          clave_temp[3].definicion = data.resultados[2].descripcion;
+          //carreras
+          clave_temp[1].carreras = data.resultados[0].carreras;
+          clave_temp[2].carreras = data.resultados[1].carreras;
+          clave_temp[3].carreras = data.resultados[2].carreras;
+        })
+        //reducing the definition
+        for(let i = 1; i<4; i++){
+          var temp_num;
+          var temp_newText;
+          temp_num = clave_temp[i].definicion.indexOf('.');
+          temp_newText = clave_temp[i].definicion.substring(0,temp_num);
+          clave_temp[i].definicion =temp_newText;
+        }
+        //name of claves
+        
+            if(clave_temp[0] !=''){
+              clearInterval(interval);
+              var claves_perfil_nombre = 'Tienes una clave: '+ clave_temp[0] +', es decir tienes características de los perfiles de: '+ clave_temp[1].nombre+ ', '+clave_temp[2].nombre+ ', '+clave_temp[3].nombre; 
+              normal_message(claves_perfil_nombre,'kiri');
+  
+              //message 3
+              setTimeout(() => {
+                var resultado_1_def = 'Tu perfil principal es '+ clave_temp[1].nombre+' es decir: '+ clave_temp[1].definicion;
+                var resultado_1_car = 'por lo que carreras como '+ clave_temp[1].carreras[0]+', '+clave_temp[1].carreras[1]+', '+clave_temp[1].carreras[2]+', y otras similares serían de gran disfrute para ti'; 
+                normal_message(resultado_1_def,'kiri');
+                normal_message(resultado_1_car,'kiri');
+                //message 4
+                setTimeout(() => {
+                  var resultado_2_def = 'adicional cuentas con un segundo perfil: '+ clave_temp[2].nombre+': '+ clave_temp[2].definicion;
+                  var resultado_2_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[2].carreras[0]+', '+clave_temp[2].carreras[1]+', '+clave_temp[2].carreras[2]+', y otras similares.'; 
+                  normal_message(resultado_2_def,'kiri');
+                  normal_message(resultado_2_car,'kiri');
+                  //message 5
+                  setTimeout(() => {
+                    var resultado_3_def = 'Por ultimo también cuentas con un perfil '+ clave_temp[3].nombre+': '+ clave_temp[3].definicion;
+                    var resultado_3_car = 'este perfil tiene afinidad con carreras como: '+ clave_temp[3].carreras[0]+', '+clave_temp[3].carreras[1]+', '+clave_temp[3].carreras[2]+', y otras similares.'; 
+                    normal_message(resultado_3_def,'kiri');
+                    normal_message(resultado_3_car,'kiri');
+                    //message 6
+                    setTimeout(() => {
+                      var message_6 = 'Recuerda que siempre puedes volver a hacer el test, sin embargo te recomiendo siempre consultar a un profesional en el área si tienes la posibilidad, ellos te permitirán profundizar en tus metas y tu visión a futuro.'
+                      normal_message(message_6,'kiri');
+                     
+                      //Message 7
+                      setTimeout(() => {
+                        var message_7 = 'Ahora en tu perfil encontraras mas información. Si quieres repetir el test puedes decirme, pero recuerda que tus datos serán eliminados.'
+                        normal_message(message_7,'kiri');
+                        setTimeout(() => {
+                          user_asnwer_options(1,'Quiero hacer el test de nuevo.','retake');
+                          var interval = setInterval(() => {
+                            if(retake_test_flag){
+                              clearInterval(interval);
+                              APP.retake_test();
+                            }
+                          }, 2000);
+                          
+                        },4000)
+                        
+                      }, 9000);
+                    }, 8500);
+  
+                  }, 6500);
+                }, 4500);
+              }, 2000);
+            }
+        }, 1000);
+       
+      }, 2000);
+     } ,
     async test(num){
       var interval;
       if (num <19){
@@ -159,10 +263,9 @@ const APP = {
                       .catch(console.warn());
        }, 4000);
       } else {
-       
         clearInterval(interval);
         calc_results(keys);
-  
+        update_msgs('save_msg','test_done');
         setTimeout(() => {
           normal_message('¡Hemos terminado!','kiri');
           setTimeout(() => {
@@ -317,9 +420,43 @@ const APP = {
   }//end of APP
   
   window.addEventListener('load', (e) => {
-    
+    APP.init();
+    get('msgs',userDB).then(async (response)=>{
+      console.log(response);
+      if(response != undefined){
+        console.log('i am before updating the chat')
+        update_msgs('update_chat'); //retrieve messages
+        ///////////////////////////////////////////////////chage icon profile
+        get('user_info', userDB).then((data)=>{
+          if(data.sexo == 'femUser'){
+            icono_profile.className = 'eicon-fem-user';
+          }else{
+            icono_profile.className = 'eicon-male-user';
+          }
+        });
+        ////////////////////////////////////////////////// retaking process
+        switch(response.completed_part){
+          case 'user_info':
+            await APP.dudas_preTest();
+            update_msgs('save_msg', 'dudas');
+            break;
+          case 'dudas':
+            await APP.dudas_preTest();
+            update_msgs('save_msg', 'test_done');
+            break;
+          case 'test_done':
+            await APP.show_results();
+            update_msgs('save_msg', 'results');
+            break;
+          case 'results':
+            break;
+        }
+
+      }
+    })
     startbtn.addEventListener('click', async()=>{
-      APP.init();
+      
+      APP.write_bd();
       startbtn.remove()
       normal_message('Hola..?',user_avatar);
       
@@ -348,9 +485,10 @@ const APP = {
         get('user_info',userDB).then((data)=>{
           if(data.name != ''){
             clearInterval(interval);
-            APP.send_message(main.innerHTML.toString());
-            APP.dudas_preTest();
-            
+            setTimeout(() => {
+              update_msgs('save_msg','user_info');
+              APP.dudas_preTest();
+            }, 2000);
           }
         }).catch(console.warn)
       }, 2000)

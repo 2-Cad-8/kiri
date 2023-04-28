@@ -211,7 +211,7 @@ export var preguntas = [
         respuesta_u:0
     },
 ]
-export let user_avatar='maleUser';
+export var user_avatar='maleUser';
 export let user ={
     name: '',
     sexo: '',
@@ -220,7 +220,19 @@ export let user ={
     resultados_pKey: {}, //resultados per key
    
 };
-
+/******** AVATAR STATUS */
+setInterval(() => {
+    get('user_info',userDB).then((data)=>{
+        if(data.sexo != user_avatar){
+            if(data.sexo == 'femUser'){
+                user_avatar = data.sexo;
+                //add here a selector of al avatars an changed them if there's changes
+            } else{
+                user_avatar = data.sexo;
+            }
+        }
+    })
+}, 1000);
 /********************************************************************************************
  *                                          FUNCIONES
  ********************************************************************************************/
@@ -1032,6 +1044,7 @@ export function update_msgs(flag,checkpoint) {
     switch(flag){
         case 'save_msg':
             msgs.messages =main.innerHTML;
+            console.log(main.innerHTML.length);
             msgs.completed_part = checkpoint;
             set('msgs', msgs , userDB).then('messages correctly saved')
             .catch(console.warn);

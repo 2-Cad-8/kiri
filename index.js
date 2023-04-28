@@ -27,6 +27,7 @@ const dudas_btns = ['¿Qué es un test?',
 ]
 const startbtn = document.getElementById('start');
 const icono_profile = document.getElementById('iconoP');
+var link = document.getElementById('profile_link');
 const APP = {
     SW: null,
     DB: null, //TODO:
@@ -115,7 +116,8 @@ const APP = {
             data.estado = true;
             set('instrucciones_test',data,doubtsDB).then(console.log('upadates isntructions state')).catch(console.warn);
             
-            setTimeout(() => {
+            setTimeout(async () => {
+             await update_msgs('save_msg','dudas');
              user_asnwer_options(2,['Si','No'],'test');
              
             },2000);
@@ -226,7 +228,9 @@ const APP = {
                       setTimeout(() => {
                         var message_7 = 'Ahora en tu perfil encontraras mas información. Si quieres repetir el test puedes decirme, pero recuerda que tus datos serán eliminados.'
                         normal_message(message_7,'kiri');
+                        
                         setTimeout(() => {
+                          update_msgs('save_msg','results');
                           user_asnwer_options(1,'Quiero hacer el test de nuevo.','retake');
                           var interval = setInterval(() => {
                             if(retake_test_flag){
@@ -425,30 +429,63 @@ const APP = {
       console.log(response);
       if(response != undefined){
         console.log('i am before updating the chat')
-        update_msgs('update_chat'); //retrieve messages
+        await update_msgs('update_chat'); //retrieve messages
         ///////////////////////////////////////////////////chage icon profile
-        get('user_info', userDB).then((data)=>{
+        await get('user_info', userDB).then((data)=>{
           if(data.sexo == 'femUser'){
             icono_profile.className = 'eicon-fem-user';
+            link.href = 'profile.html';
           }else{
             icono_profile.className = 'eicon-male-user';
+            link.href = 'profile.html';
           }
         });
         ////////////////////////////////////////////////// retaking process
+        console.log(response.completed_part)
+        //checkpoints control
         switch(response.completed_part){
           case 'user_info':
-            await APP.dudas_preTest();
-            update_msgs('save_msg', 'dudas');
+             APP.dudas_preTest();
             break;
           case 'dudas':
-            await APP.dudas_preTest();
-            update_msgs('save_msg', 'test_done');
+            //guardar mensajes antes del si no y llamarlo aqui para esperar
+            //check if the user said yes, if so don't show buttons else you do
+            await get('advertencia',doubtsDB).then((response)=>{
+              if(!response.estado){
+                setTimeout(() => {
+                  user_asnwer_options(2,['Si','No'],'test');
+                }, 2000);
+              }else{
+                normal_message('si',user_avatar);}
+            });
+            //then check to start the test
+            var interval = setInterval(() => {
+              get('advertencia', doubtsDB).then((data) => {
+                 if(data.estado){
+                    clearInterval(interval);
+                    setTimeout(() =>{
+                      APP.test(1);
+                    },2000)
+                 }
+              }).catch(console.warn)
+              
+            }, 3000);
+            
             break;
           case 'test_done':
             await APP.show_results();
-            update_msgs('save_msg', 'results');
             break;
           case 'results':
+            setTimeout(() => {
+              user_asnwer_options(1,'Quiero hacer el test de nuevo.','retake');
+              var interval = setInterval(() => {
+                if(retake_test_flag){
+                  clearInterval(interval);
+                  APP.retake_test();
+                }
+              }, 2000);
+              
+            },2000)
             break;
         }
 

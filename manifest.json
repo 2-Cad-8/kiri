@@ -1,0 +1,43 @@
+{
+    "name": "Kiri: Complemento Vocacional",
+    "short_name": "Kiri",
+    "display": "standalone",
+    "start_url": "./index.html",
+    "icons": [
+      {
+        "src": "./assets/img/icon_144.png",
+        "sizes": "151x145",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "./assets/img/icon_152.png",
+        "sizes": "162x151",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "./assets/img/icon_192.png",
+        "sizes": "205x189",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "./assets/img/icon_384.png",
+        "sizes": "414x380",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "./assets/img/icon_512x512.png",
+        "sizes": "548x507",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ],
+    "orientation": "portrait-primary",
+    "theme_color": "#0074A1",
+    "background_color": "#07365A",
+    "prefer_related_applications": false
+  }
+ 

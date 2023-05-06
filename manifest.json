@@ -1,6 +1,5 @@
 {
-    "name": "Kiri: Complemento Vocacional",
-    "short_name": "Kiri",
+    "name": "Kiri",
     "display": "standalone",
     "start_url": "./index.html",
     "icons": [

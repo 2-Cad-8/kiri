@@ -227,16 +227,46 @@ setInterval(() => {
         if(data.sexo != user_avatar && data.sexo != undefined){
             if(data.sexo == 'femUser'){
                 user_avatar = 'femUser';
-                //add here a selector of al avatars an changed them if there's changes
+                //change_all_avatars('eicon-male-user','eicon-fem-user');
             } else{
                 user_avatar = 'maleUser';
+                //change_all_avatars('eicon-fem-user','eicon-male-user');
             }
         }
     })
 }, 1000);
 /********************************************************************************************
- *                                          FUNCIONES
+ *                                  FUNCIONES
  ********************************************************************************************/
+export const change_all_avatars = (new_class) =>{
+  var user_avatars = document.getElementsByTagName('span');
+  console.log(user_avatars.length);
+  console.log(user_avatars);
+  
+  if(new_class == 'eicon-fem-user'){
+        for(var icon of user_avatars){
+            if(icon.className === 'eicon-male-user'){
+                icon.className = new_class;
+            }else{
+                continue;
+            }
+        }
+    }else if(new_class === 'eicon-male-user'){
+        for(var icon of user_avatars){
+            if(icon.className === 'eicon-fem-user'){
+                icon.className = new_class;
+            }else{
+                continue;
+          }
+    }
+  
+
+  }
+  for(var icon of user_avatars){
+    icon.className = new_class;
+
+  }
+};
 export async function search_question (i_preguntas){
     //search a question by its id and prints it
     //variables

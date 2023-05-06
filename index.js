@@ -17,6 +17,7 @@ import { search_question,
   retake_test_flag,
   main,
   update_msgs,
+  change_all_avatars,
  } from "./js/functions.js";
 import { set, get,  } from "./js/idb-keyval/dist/compat.js";
 
@@ -44,7 +45,7 @@ const APP = {
         // 1. Register a service worker hosted at the root of the
         // site using the default scope.
         navigator.serviceWorker
-          .register('/newSW.js', {
+          .register('/sw.js', {
             scope: '/',
           })
           .then((registration) => {
@@ -427,6 +428,7 @@ const APP = {
   
   window.addEventListener('load', (e) => {
     APP.init();
+    
     setTimeout(() => {
       loader.style.opacity = 0;
       loader.style.zIndex = -1
@@ -441,10 +443,14 @@ const APP = {
           if(data.sexo == 'femUser'){
             icono_profile.className = 'eicon-fem-user';
             link.href = 'profile.html';
+           // change_all_avatars('eicon-fem-user');
+                     
           }else{
             icono_profile.className = 'eicon-male-user';
             link.href = 'profile.html';
+            //change_all_avatars('eicon-male-user');
           }
+          console.log(document.getElementsByTagName('span'))
         });
         ////////////////////////////////////////////////// retaking process
         

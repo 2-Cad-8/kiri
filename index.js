@@ -413,16 +413,7 @@ const APP = {
       //got a message from the service worker
       console.log('Web page receiving', data);
     },
-    reload_chat(){
-      /* Loads the chat from the cache */
-      //check if there's cache
-      if(caches.has('chatCache')){
-        //if there is load it
-
-      }
-      
-      //else do nothing await for the user
-    }
+  
     
   }//end of APP
   
@@ -443,12 +434,12 @@ const APP = {
           if(data.sexo == 'femUser'){
             icono_profile.className = 'eicon-fem-user';
             link.href = 'profile.html';
-           // change_all_avatars('eicon-fem-user');
+           change_all_avatars('eicon-fem-user');
                      
           }else{
             icono_profile.className = 'eicon-male-user';
             link.href = 'profile.html';
-            //change_all_avatars('eicon-male-user');
+            change_all_avatars('eicon-male-user');
           }
           console.log(document.getElementsByTagName('span'))
         });

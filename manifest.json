@@ -5,7 +5,7 @@
     "icons": [
       {
         "src": "./assets/img/icon_144.png",
-        "sizes": "151x145",
+        "sizes": "137x137",
         "type": "image/png",
         "purpose": "maskable"
       },

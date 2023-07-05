@@ -1,7 +1,7 @@
 * {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Lucida Sans', 'Montserrat', 'Open Sans', sans-serif;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -115,7 +115,7 @@ body .main .message-group .message-format .load span:nth-child(3) {
 }
 body .main .message-group .message-format.kiri {
   background-color: #3F79A6;
-  margin: 0.3125rem 3%;
+  margin: 0.625rem 3%;
   padding-right: 0.625rem;
   padding-left: 0.4375rem;
   order: 2;

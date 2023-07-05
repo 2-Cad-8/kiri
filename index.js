@@ -348,15 +348,15 @@ const APP = {
                           setTimeout(() => {
                             var message_7 = 'Ahora en tu perfil encontraras mas información. Si quieres repetir el test puedes decirme, pero recuerda que tus datos serán eliminados.'
                             normal_message(message_7,'kiri');
+                            update_msgs('save_msg','results');
                             setTimeout(() => {
                               user_asnwer_options(1,'Quiero hacer el test de nuevo.','retake');
-                              update_msgs('save_msg','results');
                               var interval = setInterval(() => {
                                 if(retake_test_flag){
                                   clearInterval(interval);
                                   APP.retake_test();
                                 }
-                              }, 2000);
+                              }, 2100);
                               
                             },4000)
                             

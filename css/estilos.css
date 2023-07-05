@@ -22,9 +22,8 @@ input {
   outline: none;
   min-height: 2.375rem;
   border-radius: 1.25rem;
-  font-size: 1.0625rem;
-  padding-left: 5%;
-  padding-right: 3%;
+  padding-left: 0.5rem;
+  padding-right: 0.3571rem;
   font-family: 'Lucida Sans', 'Montserrat', 'Open Sans', sans-serif;
 }
 button {
@@ -363,5 +362,5 @@ body .main .slider-car .card:hover {
   padding-left: 0;
 }
 .bottom-bar .container.col.der {
-  flex-grow: 2;
+  flex-grow: 3;
 }
